@@ -1,10 +1,11 @@
-import express from "express";
-import verify from "jsonwebtoken";
+import express, { Application } from "express";
+import auth from "./routes/auth";
+// import auth from "./routes/auth";
 
-const app = express();
+const app: Application = express();
 
-app.get("/", async (req: any, res) => {
-  res.json("test");
-});
+app.use("/", auth);
 
-console.error("Test Error");
+app.listen(3000, () => {
+    console.log("Server is running on port 3000");
+})
