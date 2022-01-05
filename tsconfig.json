@@ -1,58 +1,41 @@
 {
   "compilerOptions": {
-    "target": "es2016",
+    "target": "ES6",
     "module": "commonjs",
-    "rootDir": "src",
-    "moduleResolution": "node",
-    "baseUrl": "./",
-    // "paths": {},                                      /* Specify a set of entries that re-map imports to additional lookup locations. */
-    // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
-    // "typeRoots": [],                                  /* Specify multiple folders that act like `./node_modules/@types`. */
-    // "types": [],                                      /* Specify type package names to be included without being referenced in a source file. */
-    "allowUmdGlobalAccess": true,
-    "resolveJsonModule": true,
-    "noResolve": true,
     "outDir": "build",
-    "removeComments": true,
-    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./src",
+    "moduleResolution": "node",
     "strict": true,
+    "alwaysStrict": true,
+    "skipLibCheck": true,
     "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "noImplicitThis": true,
+    "removeComments": true,
+    "esModuleInterop": true,
     "strictNullChecks": true,
+    "noImplicitReturns": true,
+    "resolveJsonModule": true,
+    "noImplicitOverride": true,
+    "allowUnusedLabels": false,
+    "noUnusedParameters": true,
     "strictFunctionTypes": true,
     "strictBindCallApply": true,
-    "strictPropertyInitialization": true,
-    "noImplicitThis": true,
-    "useUnknownInCatchVariables": true,
-    "alwaysStrict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "exactOptionalPropertyTypes": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUncheckedIndexedAccess": true,
-    "noImplicitOverride": true,
-    "noPropertyAccessFromIndexSignature": true,
-    "allowUnusedLabels": false,
+    "allowUmdGlobalAccess": true,
     "allowUnreachableCode": true,
-    "esModuleInterop": true,
+    "noUncheckedIndexedAccess": true,
+    "noFallthroughCasesInSwitch": true,
+    "exactOptionalPropertyTypes": true,
+    "useUnknownInCatchVariables": true,
+    "allowSyntheticDefaultImports": true,
+    "strictPropertyInitialization": true,
+    "forceConsistentCasingInFileNames": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "typeRoots": ["@types", "./node_modules/@types"],
     "paths": {
-      "*": [
-        "node_modules/*"
-      ],
-      "@helpers": [
-        "./src/helpers"
-      ],
-    },
-    "plugins": [
-      {
-        "transform": "@zerollup/ts-transform-paths"
-      }
-    ]
+      "*": ["node_modules/*", "src/types/*"],
+      "@helpers": ["./src/helpers"]
+    }
   },
-  "include": [
-    "./**/*"
-  ],
-  "types": [
-    "node"
-  ]
+  "include": ["src/**/*"]
 }

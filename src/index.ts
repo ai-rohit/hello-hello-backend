@@ -1,11 +1,14 @@
-import express, { Application } from "express";
-import auth from "./routes/auth";
-// import auth from "./routes/auth";
+import "dotenv/config";
+import createServer from "./server";
 
-const app: Application = express();
+const startServer = async (): Promise<any> => {
+  const app = createServer();
 
-app.use("/", auth);
+  const port: number = parseInt(<string>process.env["PORT"]) || 3000;
 
-app.listen(3000, () => {
-    console.log("Server is running on port 3000");
-})
+  (await app).listen(port, () => {
+    console.log(`🚀 auth service running on port http://localhost:${port}`);
+  });
+};
+
+startServer();
