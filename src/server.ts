@@ -5,7 +5,7 @@ import routes from "./routes";
 /**
  * Create server config.
  */
-const createServer = async (): Promise<Express> => {
+const createServer = (): Express => {
   const app: Express = express();
 
   app.use(cors());

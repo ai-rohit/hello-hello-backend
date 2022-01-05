@@ -1,14 +1,14 @@
-import { Router, Response } from "express";
+import { Router, Response, Request } from "express";
 
-const router: any = Router();
+const router = Router();
 
 /**
- * @route GET/auth
- * @desc create user
- * @access authenticated
+ * @route GET/POST/PUT/DELETE auth
+ * @desc user authentication
+ * @access allow all
  */
-router.get("/", (res: Response) => {
-  res.status(200).json("200");
+router.get("/", (req: Request, res: Response) => {
+  res.send("Hello Hello Chat");
 });
 
 export default router;
