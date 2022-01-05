@@ -1,10 +1,14 @@
-import express from "express";
-import verify from "jsonwebtoken";
+import "dotenv/config";
+import createServer from "./server";
 
-const app = express();
+const startServer = async (): Promise<any> => {
+  const app = createServer();
 
-app.get("/", async (req: any, res) => {
-  res.json("test");
-});
+  const port: number = parseInt(<string>process.env.PORT) || 3000;
 
-console.error("Test Error");
+  (await app).listen(port, () => {
+    console.log(`🚀 Server running on port http://localhost:${port}`);
+  });
+};
+
+startServer();
