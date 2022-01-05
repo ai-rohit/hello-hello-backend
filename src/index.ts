@@ -6,7 +6,7 @@ const startServer = async (): Promise<any> => {
 
   const port: number = parseInt(<string>process.env.PORT) || 3000;
 
-  (await app).listen(port, () => {
+  app.listen(port, () => {
     console.log(`🚀 Server running on port http://localhost:${port}`);
   });
 };
