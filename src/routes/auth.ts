@@ -38,7 +38,7 @@ router.post("/email", async (req: Request, res: Response) => {
       }
     });
     const result = await newUser.save();
-    console.log(result);
+
     return res.status(200).json({
       status: "success",
       data: {
@@ -54,7 +54,7 @@ router.post("/email", async (req: Request, res: Response) => {
   };
   user.tokenData = tokenData;
   const result = await user.save();
-  console.log(result);
+
   return res.status(200).json({
     status: "success",
     data: {
@@ -65,5 +65,6 @@ router.post("/email", async (req: Request, res: Response) => {
 
   //send email
 })
+
 
 export default router;

@@ -23,7 +23,7 @@
       ],
       "@helpers": [
         "./src/helpers"
-      ]
+      ],
     }
   },
   "include": [
