@@ -5,28 +5,19 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "noImplicitAny": true,
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "typeRoots": [
-      "@types",
-      "./node_modules/@types"
-    ],
+    "typeRoots": ["@types", "./node_modules/@types"],
     "paths": {
-      "*": [
-        "node_modules/*",
-        "src/types/*"
-      ],
-      "@helpers": [
-        "./src/helpers"
-      ]
+      "*": ["node_modules/*", "src/types/*"],
+      "@helpers": ["./src/helpers"],
+      "@routes": ["./src/routes"]
     }
   },
-  "include": [
-    "src/**/*"
-  ]
+  "include": ["src"]
 }

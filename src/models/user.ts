@@ -1,54 +1,44 @@
 import mongoose from "mongoose";
+import { IUser } from "../interfaces";
 
-interface User {
-    firstName: string;
-    lastName: string;
-    username: string;
-    email: string;
-    avatar?: string;
-    role: string;
-    bio?: string;
-    tokenData?: any;
-}
-// interface UserModel extends mongoose.Model<User>{
-
-// }
-
-const userSchema = new mongoose.Schema<User>({
+const userSchema = new mongoose.Schema<IUser>(
+  {
     firstName: {
-        type: String,
+      type: String,
     },
     lastName: {
-        type: String,
+      type: String,
     },
     username: {
-        type: String,
+      type: String,
     },
     email: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     avatar: {
-        type: String,
+      type: String,
     },
     role: {
-        type: String,
-        required: true,
-        default: "user"
+      type: String,
+      required: true,
+      default: "user",
     },
     bio: {
-        type: String,
+      type: String,
     },
     tokenData: {
-        token: {
-            type: String,
-        },
-        expiresIn: {
-            type: Date,
-        }
-    }
-}, { timestamps: true });
+      token: {
+        type: String,
+      },
+      expiresIn: {
+        type: Date,
+      },
+    },
+  },
+  { timestamps: true }
+);
 
-const User = mongoose.model<User>("User", userSchema);
+const User = mongoose.model<IUser>("User", userSchema);
 
-export default User;
+export { User };

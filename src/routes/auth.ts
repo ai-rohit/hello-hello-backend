@@ -34,8 +34,8 @@ router.post("/email", async (req: Request, res: Response) => {
       email,
       tokenData: {
         token: "11234",
-        expiresIn: new Date(new Date().getTime() + 600000)
-      }
+        expiresIn: new Date(new Date().getTime() + 600000),
+      },
     });
     const result = await newUser.save();
     console.log(result);
@@ -43,14 +43,14 @@ router.post("/email", async (req: Request, res: Response) => {
       status: "success",
       data: {
         emailToCheck: result.email,
-        isNewUser: true
-      }
-    })
+        isNewUser: true,
+      },
+    });
     //send mail
   }
   const tokenData: any = {
     token: "11234",
-    expiresIn: new Date(new Date().getTime() + 600000)
+    expiresIn: new Date(new Date().getTime() + 600000),
   };
   user.tokenData = tokenData;
   const result = await user.save();
@@ -59,11 +59,11 @@ router.post("/email", async (req: Request, res: Response) => {
     status: "success",
     data: {
       emailToCheck: result.email,
-      isNewUser: false
-    }
-  })
+      isNewUser: false,
+    },
+  });
 
   //send email
-})
+});
 
 export default router;
