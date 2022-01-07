@@ -12,9 +12,11 @@
     "forceConsistentCasingInFileNames": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "typeRoots": ["@types", "./node_modules/@types"],
+    "typeRoots": [
+      "@types",
+      "./node_modules/@types"
+    ],
     "paths": {
-<<<<<<< HEAD
       "*": [
         "node_modules/*",
         "src/types/*"
@@ -22,12 +24,9 @@
       "@helpers": [
         "./src/helpers"
       ],
-=======
-      "*": ["node_modules/*", "src/types/*"],
-      "@helpers": ["./src/helpers"],
-      "@routes": ["./src/routes"]
->>>>>>> 40a3f72b76ec3880d65883d425156b31aea20220
     }
   },
-  "include": ["src"]
+  "include": [
+    "src"
+  ]
 }
