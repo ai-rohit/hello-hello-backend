@@ -15,7 +15,7 @@ class AuthController extends BaseController {
   async login(req: Request, res: Response) {
     console.log(req.body.email);
     const { email } = req.body;
-    const user: any = await this.model.findOne({ email });
+    const user = await this.model.findOne<IUser>({ email });
     console.log(1);
     const tokenData: ITokenData = {
       token: generateRandomToken(),

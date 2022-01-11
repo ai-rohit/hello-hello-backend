@@ -1,9 +1,11 @@
+import { Document } from "mongoose";
+
 export interface ITokenData {
   token: string;
   expiresIn: Date;
 }
 
-export interface IUser {
+export interface IUser extends Document {
   email: string;
   tokenData?: ITokenData;
 }
