@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import { IPopulate } from "./IPopulate.interface";
 
 export interface IModel {
-    mongooseModel: mongoose.Model<any>;
+    model: mongoose.Model<any>;
     create<T>(document: any): Promise<T>;
     findById<T>(id: string, populate?: IPopulate): Promise<T>;
     findOne<T>(query: any, populate?: IPopulate): Promise<T>;

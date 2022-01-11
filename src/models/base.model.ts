@@ -35,7 +35,7 @@ export class BaseModel {
             : this.model.find(query).exec()
     }
 
-    updateByID<T>(id: string, document: any, populate?: IPopulate): Promise<T> {
+    updateById<T>(id: string, document: any, populate?: IPopulate): Promise<T> {
         return populate ?
             this.model.findByIdAndUpdate(id, document, this.returnNew).populate(populate).exec() :
             this.model.findByIdAndUpdate(id, document, this.returnNew).populate(populate).exec();

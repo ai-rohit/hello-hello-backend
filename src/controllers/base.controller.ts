@@ -20,4 +20,5 @@ export class BaseController {
             error: message
         })
     }
+
 }

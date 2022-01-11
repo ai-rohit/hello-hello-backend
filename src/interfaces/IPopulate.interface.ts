@@ -1,5 +1,5 @@
 export interface IPopulate {
-    path: string;
-    model?: string;
-    populate?: IPopulate
+  path: string;
+  model?: string;
+  populate?: IPopulate
 }
