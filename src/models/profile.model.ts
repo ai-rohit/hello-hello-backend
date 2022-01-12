@@ -1,15 +1,6 @@
 import mongoose from "mongoose";
 import { BaseModel } from "./base.model";
-
-interface IProfile {
-    firstName: string;
-    lastName: string;
-    username: string;
-    avatar: string;
-    role: string;
-    bio: string;
-    user: mongoose.ObjectId
-}
+import { IProfile } from "../interfaces";
 
 const profileSchema = new mongoose.Schema<IProfile>({
     firstName: {

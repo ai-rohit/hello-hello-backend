@@ -1,4 +1,4 @@
-import { Document } from "mongoose";
+import { Document, ObjectId } from "mongoose";
 
 export interface ITokenData {
   token: string;
@@ -8,6 +8,16 @@ export interface ITokenData {
 export interface IUser extends Document {
   email: string;
   tokenData?: ITokenData;
+}
+
+export interface IProfile extends Document {
+  firstName: string;
+  lastName: string;
+  username: string;
+  avatar: string;
+  role: string;
+  bio: string;
+  user: ObjectId
 }
 
 export * from "./IModel.interface";
