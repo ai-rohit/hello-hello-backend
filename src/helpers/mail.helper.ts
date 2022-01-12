@@ -10,7 +10,6 @@ interface MailParam{
 class Mailer{
   private transporter;
   constructor(){
-    console.log(process.env.MAIL_USER, process.env.MAIL_PASSWORD)
     this.transporter = nodemailer.createTransport({
       service:"Gmail",
       auth:{

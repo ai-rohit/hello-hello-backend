@@ -35,7 +35,7 @@ class AuthController extends BaseController {
       email,
       tokenData,
     });
-    
+    //send mail
     return this.successRes({
       mailToCheck: result.email,
       isNewUser: true
