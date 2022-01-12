@@ -1,6 +1,6 @@
 import "dotenv/config";
 import createServer from "./server";
-import { TEXT } from "./constants";
+import { TEXT } from "@constants";
 
 const startServer = async (): Promise<any> => {
   // dotenv.config();

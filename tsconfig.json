@@ -6,27 +6,24 @@
     "allowSyntheticDefaultImports": true,
     "noImplicitAny": true,
     "baseUrl": ".",
+    "rootDir": ".",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "typeRoots": [
-      "@types",
-      "./node_modules/@types"
-    ],
+    "typeRoots": ["@types", "./node_modules/@types"],
     "paths": {
-      "*": [
-        "node_modules/*",
-        "src/types/*"
-      ],
-      "@helpers": [
-        "./src/helpers"
-      ],
+      "*": ["node_modules/*", "src/types/*"],
+      "@helpers": ["./src/helpers"],
+      "@routes": ["./src/routes"],
+      "@controllers": ["./src/routes"],
+      "@config": ["./src/config"],
+      "@constants": ["./src/constants"],
+      "@interfaces": ["./src/interfaces"],
+      "@middlewares": ["./src/middlewares"],
+      "@models": ["./src/models"]
     }
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src", "**/*.ts"],
+  "exclude": ["node_modules"]
 }

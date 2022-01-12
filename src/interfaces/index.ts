@@ -20,5 +20,5 @@ export interface IProfile extends Document {
   user: ObjectId
 }
 
-export * from "./IModel.interface";
-export * from "./IPopulate.interface";
+export * from "./model.interface";
+export * from "./populate.interface";

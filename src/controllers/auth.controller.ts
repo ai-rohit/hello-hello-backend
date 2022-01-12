@@ -1,10 +1,9 @@
 // import {User} from "../models";
-
 import { Request, Response } from "express";
-import { UserModel, ProfileModel } from "../models";
+import { UserModel, ProfileModel } from "@models";
 import { BaseController } from "./base.controller";
-import { generateRandomToken, mailer } from "../helpers";
-import { IModel, ITokenData, IUser, IProfile } from "../interfaces";
+import { generateRandomToken, mailer } from "@helpers";
+import { IModel, ITokenData, IUser, IProfile } from "@interfaces";
 class AuthController extends BaseController {
   public profileModel: IModel;
   constructor() {
@@ -23,7 +22,7 @@ class AuthController extends BaseController {
 
     if (user) {
       user.tokenData = tokenData;
-      mailer.sendMail({ from:"abc", to:"shrestharohit553@gmail.com", subject:"User verification mail", message:"Verify yourselt using token", data:tokenData.token })
+      mailer.sendMail({ from:"abc", to:user.email, subject:"User verification mail", message:"Verify yourselt using token", data:tokenData.token })
       await user.save();
 
       const userProfile = await this.profileModel.findOne<IProfile>({ user: user._id });
@@ -34,7 +33,7 @@ class AuthController extends BaseController {
 
     const result = await this.model.create<IUser>({
       email,
-      tokenData
+      tokenData,
     });
     
     return this.successRes({
