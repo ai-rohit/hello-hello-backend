@@ -7,8 +7,8 @@
   "license": "MIT",
   "scripts": {
     "start": "ts-node-dev -r tsconfig-paths/register --respawn src/index.ts",
-    "dev": "set NODE_PATH=./build & node build/index.js",
-    "build": "tsc -b",
+    "dev": "set NODE_PATH=./build & node build/src/index.js",
+    "build": "rimraf build && tsc",
     "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write"
   },
   "dependencies": {
@@ -17,7 +17,8 @@
     "express-validator": "^6.14.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.1.5",
-    "nodemailer": "^6.7.2"
+    "nodemailer": "^6.7.2",
+    "rimraf": "^3.0.2"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
