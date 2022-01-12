@@ -1,4 +1,4 @@
-import express, { Express } from "express";
+import express, { Express, Response, Request } from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import { dbConfig } from "@config";
@@ -24,8 +24,13 @@ const createServer = (): Express => {
       console.log(err);
     });
 
-  app.use(routes);
-
+  app.use("/api/v1", routes);
+  app.use("*", async (req: Request, res: Response)=>{
+    return res.status(404).json({
+      status:"error",
+      message:"Invalid API endpoint"
+    })
+  })
   return app;
 };
 

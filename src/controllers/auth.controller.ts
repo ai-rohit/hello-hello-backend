@@ -42,11 +42,26 @@ class AuthController extends BaseController {
     }, res)
   }
 
-  // async verifyUser(req: Request, res: Response){
-  //   const { email, token } =  req.body;
-  //   const user = await this.model.findOne({email});
+  async verifyUser(req: Request, res: Response){
+    const { email, token } =  req.body;
+    const user = await this.model.findOne<IUser>({ email });
     
-  // }
+    if(!user){
+      return this.failureRes(400, "User not found", res);
+    }
+
+    if(user.tokenData){
+      if(user.tokenData.token === token && user.tokenData.expiresIn > token){
+        //create jwt
+        //remove token for user
+        user.tokenData = undefined;
+        await user.save();
+        return this.successRes({ token:"asdasdasd2818917u8e9u131h2euadas876dgajsd97sadgbsaudyaisd" }, res);
+      }
+      return this.failureRes(400, "Sorry, token doesn't match", res);
+    }
+    return this.failureRes(500, "Something went wrong", res);
+  }
 }
 
 export { AuthController };
