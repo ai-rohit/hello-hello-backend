@@ -1,9 +1,9 @@
 import express, { Express } from "express";
 import mongoose from "mongoose";
 import cors from "cors";
-import { dbConfig } from "./config";
-import routes from "./routes";
-import { TEXT } from "./constants";
+import { dbConfig } from "@config";
+import routes from "@routes";
+import { TEXT } from "@constants";
 
 /**
  * Create server config.

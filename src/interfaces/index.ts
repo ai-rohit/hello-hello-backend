@@ -10,5 +10,5 @@ export interface IUser extends Document {
   tokenData?: ITokenData;
 }
 
-export * from "./IModel.interface";
-export * from "./IPopulate.interface";
+export * from "./model.interface";
+export * from "./populate.interface";

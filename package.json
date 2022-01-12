@@ -6,7 +6,7 @@
   "author": "rohit553-ai <68155913+rohit553-ai@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
-    "start": "ts-node-dev --respawn src/index.ts",
+    "start": "ts-node-dev -r tsconfig-paths/register --respawn src/index.ts",
     "dev": "set NODE_PATH=./build & node build/index.js",
     "build": "tsc -b",
     "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write"

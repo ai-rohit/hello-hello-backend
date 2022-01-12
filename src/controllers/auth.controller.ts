@@ -1,10 +1,9 @@
 // import {User} from "../models";
-
 import { Request, Response } from "express";
-import { UserModel, ProfileModel } from "../models";
+import { UserModel, ProfileModel } from "@models";
 import { BaseController } from "./base.controller";
-import { generateRandomToken } from "../helpers";
-import { IModel, ITokenData, IUser } from "../interfaces";
+import { generateRandomToken } from "@helpers";
+import { IModel, ITokenData, IUser } from "@interfaces";
 class AuthController extends BaseController {
   public profileModel: IModel;
   constructor() {
@@ -20,25 +19,32 @@ class AuthController extends BaseController {
     const tokenData: ITokenData = {
       token: generateRandomToken(),
       expiresIn: new Date(new Date().getTime() + 600000),
-    }
+    };
     if (user) {
       user.tokenData = tokenData;
       //send mail
       await user.save();
       console.log(user);
-      return this.successRes({
-        mailToCheck: user.email, isNewUser: false
-      }, res);
+      return this.successRes(
+        {
+          mailToCheck: user.email,
+          isNewUser: false,
+        },
+        res
+      );
     }
 
     const result = await this.model.create<IUser>({
       email,
-      tokenData
+      tokenData,
     });
-    return this.successRes({
-      mailToCheck: result.email,
-      isNewUser: true
-    }, res)
+    return this.successRes(
+      {
+        mailToCheck: result.email,
+        isNewUser: true,
+      },
+      res
+    );
   }
 }
 
