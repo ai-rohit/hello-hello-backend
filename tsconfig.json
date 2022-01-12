@@ -10,6 +10,7 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "strict": true,
+    "outDir": "build",
     "forceConsistentCasingInFileNames": true,
     "typeRoots": ["@types", "./node_modules/@types"],
     "paths": {
