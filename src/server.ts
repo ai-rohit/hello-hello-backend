@@ -24,6 +24,12 @@ const createServer = (): Express => {
       console.log(err);
     });
 
+  app.get("/", (req: Request, res: Response)=>{
+    const ip = req.ip;
+    console.log(ip);
+    console.log(req.socket.remoteAddress);
+    res.send(ip);
+  })
   app.use("/api/v1", routes);
   app.use("*", async (req: Request, res: Response)=>{
     return res.status(404).json({
