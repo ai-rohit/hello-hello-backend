@@ -1,14 +1,10 @@
-import { Router, Response, Request } from "express";
+import { Router, Request, Response } from "express";
+import { AuthController } from "../controllers";
 
-const router = Router();
+const authRouter = Router();
 
-/**
- * @route GET/POST/PUT/DELETE auth
- * @desc user authentication
- * @access allow all
- */
-router.get("/", (req: Request, res: Response) => {
-  res.send("Hello Hello Chat");
-});
+const auth = new AuthController();
+authRouter.post("/login", (req: Request, res: Response) => auth.login(req, res));
+authRouter.post("/verify-user", (req: Request, res: Response)=> auth.verifyUser(req, res));
 
-export default router;
+export default authRouter;

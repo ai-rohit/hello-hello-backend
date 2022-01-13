@@ -1,6 +1,9 @@
-import express, { Express } from "express";
+import express, { Express, Response, Request } from "express";
+import mongoose from "mongoose";
 import cors from "cors";
-import routes from "./routes";
+import { dbConfig } from "@config";
+import routes from "@routes";
+import { TEXT } from "@constants";
 
 /**
  * Create server config.
@@ -12,8 +15,22 @@ const createServer = (): Express => {
 
   app.use(express.json());
 
-  app.use(routes);
+  mongoose
+    .connect(dbConfig.url, dbConfig.options)
+    .then(() => {
+      console.log(TEXT.DATABASE_STATUS);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 
+  app.use("/api/v1", routes);
+  app.use("*", async (req: Request, res: Response)=>{
+    return res.status(404).json({
+      status:"error",
+      message:"Invalid API endpoint"
+    })
+  })
   return app;
 };
 
