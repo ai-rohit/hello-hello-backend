@@ -12,6 +12,11 @@ class ProfileController extends BaseController{
     const newProfile = await this.model.create<IProfile>({ ...req.body, user: req.currentUser._id });
     return this.successRes(newProfile, res);
   }
+
+  async myProfile(req: Request, res: Response){
+    const profile = await this.model.findOne<IProfile>({ user: req.currentUser._id }, { path: "user" });
+    this.successRes(profile, res);
+  }
 }
 
 export { ProfileController };
