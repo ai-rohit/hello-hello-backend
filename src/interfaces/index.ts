@@ -8,6 +8,7 @@ export interface ITokenData {
 export interface IUser extends Document {
   email: string;
   tokenData?: ITokenData;
+  generateJwtTokens(type: string): string;
 }
 
 export interface IProfile extends Document {
@@ -17,7 +18,7 @@ export interface IProfile extends Document {
   avatar: string;
   role: string;
   bio: string;
-  user: ObjectId
+  user: ObjectId;
 }
 
 export * from "./model.interface";
