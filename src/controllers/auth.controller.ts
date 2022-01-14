@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import { UserModel, ProfileModel } from "@models";
 import { BaseController } from "./base.controller";
 import { generateRandomToken, mailer } from "@helpers";
-import { IModel, ITokenData, IUser } from "@interfaces";
+import { IModel, IProfile, ITokenData, IUser } from "@interfaces";
 class AuthController extends BaseController {
   public profileModel: IModel;
   constructor() {
@@ -13,14 +13,15 @@ class AuthController extends BaseController {
 
   async login(req: Request, res: Response) {
     const { email } = req.body;
-    const user = await this.model.findOne<IUser>({ email });
+    const user = await this.model.findOne<IUser>({ email: email });
+    console.log(user);
     console.log(req.ip);
     console.log(req.socket.remoteAddress);
     const tokenData: ITokenData = {
       token: generateRandomToken(),
       expiresIn: new Date(new Date().getTime() + 600000),
     }
-
+    
     if (user) {
       user.tokenData = tokenData;
       mailer.sendMail({ from:"abc", to:user.email, subject:"User verification mail", message:"Verify yourselt using token", data:tokenData.token })
@@ -29,7 +30,6 @@ class AuthController extends BaseController {
         mailToCheck: user.email
       }, res);
     }
-
     const result = await this.model.create<IUser>({
       email,
       tokenData,
@@ -50,13 +50,18 @@ class AuthController extends BaseController {
     if(user.tokenData){
       if(user.tokenData.token === token && user.tokenData.expiresIn > token){
         //create jwt
+        let hasProfile = false;
         const accessToken: string = user.generateJwtTokens("access");
         const refreshToken: string = user.generateJwtTokens("refresh");
-        console.log(accessToken);
 
+        const userProfile = await this.profileModel.findOne<IProfile>({ user: user._id });
+
+        if(userProfile) hasProfile = true;
+
+        //removing user token data
         user.tokenData = undefined;
         await user.save();
-        return this.successRes({ accessToken, refreshToken }, res);
+        return this.successRes({ accessToken, refreshToken, hasProfile }, res);
       }
       return this.failureRes(400, "Sorry, token doesn't match", res);
     }
