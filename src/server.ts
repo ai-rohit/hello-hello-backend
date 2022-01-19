@@ -25,12 +25,12 @@ const createServer = (): Express => {
     });
 
   app.use("/api/v1", routes);
-  app.use("*", async (req: Request, res: Response)=>{
+  app.use("*", async (req: Request, res: Response) => {
     return res.status(404).json({
-      status:"error",
-      message:"Invalid API endpoint"
-    })
-  })
+      status: "error",
+      message: "Invalid API endpoint",
+    });
+  });
   return app;
 };
 
