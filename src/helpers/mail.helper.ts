@@ -21,15 +21,18 @@ class Mailer {
       },
     });
 
-    this.transporter.use(
-      "compile",
-      hbs({
-        viewEngine: {
-          partialsDir: path.resolve("views"),
-        },
-        viewPath: path.resolve("./src/views"),
-      })
-    );
+    const handlebarOptions = {
+      viewEngine: {
+        extName: ".handlebars",
+        partialsDir: path.join(__dirname, "../views/"),
+        layoutsDir: path.join(__dirname, "../views/"),
+        defaultLayout: "",
+      },
+      viewPath: path.join(__dirname, "../views/"),
+      extName: ".handlebars",
+    };
+
+    this.transporter.use("compile", hbs(handlebarOptions));
   }
 
   async sendMail({ from, to, subject, message, data }: MailParam) {
@@ -37,7 +40,7 @@ class Mailer {
       from,
       to,
       subject,
-      template: "verify-email",
+      template: "verify",
       text: message,
       context: {
         email: to,

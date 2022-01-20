@@ -1,5 +1,6 @@
 import express, { Express, Response, Request } from "express";
 import mongoose from "mongoose";
+import path from "path";
 import cors from "cors";
 import { dbConfig } from "@config";
 import routes from "@routes";
@@ -14,6 +15,7 @@ const createServer = (): Express => {
   app.use(cors());
 
   app.use(express.json());
+  app.set("views", path.join(__dirname, "views"));
 
   mongoose
     .connect(dbConfig.url, dbConfig.options)
