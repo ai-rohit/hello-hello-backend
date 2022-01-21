@@ -18,6 +18,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.1.5",
     "nodemailer": "^6.7.2",
+    "nodemailer-express-handlebars": "^4.0.0",
     "rimraf": "^3.0.2"
   },
   "devDependencies": {
@@ -26,6 +27,7 @@
     "@types/jsonwebtoken": "^8.5.6",
     "@types/node": "^17.0.6",
     "@types/nodemailer": "^6.4.4",
+    "@types/nodemailer-express-handlebars": "^4.0.2",
     "@typescript-eslint/eslint-plugin": "^5.8.1",
     "@typescript-eslint/parser": "^5.8.1",
     "cors": "^2.8.5",
