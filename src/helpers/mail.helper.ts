@@ -1,14 +1,7 @@
-import nodemailer from "nodemailer";
 import hbs from "nodemailer-express-handlebars";
+import nodemailer from "nodemailer";
 import path from "path";
-
-interface MailParam {
-  from: string;
-  to: string;
-  subject: string;
-  message: string;
-  data: string;
-}
+import { MailParam } from "@interfaces";
 
 class Mailer {
   private transporter;
@@ -46,7 +39,6 @@ class Mailer {
         email: to,
         code: data,
       },
-      // html: `<p>Password Reset Token</p>+Token:<p>User Verification Token</p>${data}`,
     };
 
     try {

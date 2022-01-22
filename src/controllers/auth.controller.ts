@@ -24,7 +24,7 @@ class AuthController extends BaseController {
     if (user) {
       user.tokenData = tokenData;
       mailer.sendMail({
-        from: "poonprakash22@gmail.com",
+        from: "Hello Hello Chat",
         to: user.email,
         subject: "User verification mail",
         message: "Verify yourself using token",
