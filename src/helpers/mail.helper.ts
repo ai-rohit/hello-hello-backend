@@ -38,6 +38,14 @@ class Mailer {
       context: {
         email: to,
         code: data,
+        loginInfo: {
+          device: "Windows",
+          desktop: false,
+          mobile: true,
+          timeStamp: "January 14 , 2022, 5:42 AM (GMT)",
+          browser: "Chrome",
+          location: "Pokhara, Nepal",
+        },
       },
     };
 
