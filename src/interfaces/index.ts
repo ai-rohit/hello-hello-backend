@@ -17,7 +17,15 @@ export interface IProfile extends Document {
   avatar: string;
   role: string;
   bio: string;
-  user: ObjectId
+  user: ObjectId;
+}
+
+export interface MailParam {
+  from: string;
+  to: string;
+  subject: string;
+  message: string;
+  data: string;
 }
 
 export * from "./model.interface";
