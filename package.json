@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "start": "ts-node-dev -r tsconfig-paths/register --respawn src/index.ts",
-    "dev": "set NODE_PATH=./build && ts-node -r tsconfig-paths/register build/src/index.js",
+    "dev": "ts-node -r tsconfig-paths/register build/src/index.js",
     "build": "tsc -p .",
     "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write"
   },
@@ -22,8 +22,7 @@
     "nodemailer-express-handlebars": "^4.0.0",
     "ts-node": "^10.4.0",
     "ts-node-dev": "^1.1.8",
-    "tsconfig-paths": "^3.12.0",
-    "typescript": "^4.5.4"
+    "tsconfig-paths": "^3.12.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
