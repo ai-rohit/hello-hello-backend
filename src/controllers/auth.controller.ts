@@ -4,6 +4,10 @@ import { UserModel, ProfileModel } from "@models";
 import { BaseController } from "./base.controller";
 import { generateRandomToken, mailer } from "@helpers";
 import { IModel, IProfile, ITokenData, IUser } from "@interfaces";
+
+// interface UserMode {
+//   decodeJwt: (token: string) => any; 
+// }
 class AuthController extends BaseController {
   public profileModel: IModel;
   constructor() {
@@ -14,9 +18,6 @@ class AuthController extends BaseController {
   async login(req: Request, res: Response) {
     const { email } = req.body;
     const user = await this.model.findOne<IUser>({ email: email });
-    console.log(user);
-    console.log(req.ip);
-    console.log(req.socket.remoteAddress);
     const tokenData: ITokenData = {
       token: generateRandomToken(),
       expiresIn: new Date(new Date().getTime() + 600000),
@@ -24,7 +25,7 @@ class AuthController extends BaseController {
     
     if (user) {
       user.tokenData = tokenData;
-      mailer.sendMail({ from:"abc", to:user.email, subject:"User verification mail", message:"Verify yourselt using token", data:tokenData.token })
+      mailer.sendMail({ from:"abc", to:user.email, subject:"User verification mail", message:"Verify yourself using token", data:tokenData.token })
       await user.save();
       return this.successRes({
         mailToCheck: user.email
@@ -43,7 +44,6 @@ class AuthController extends BaseController {
   async verifyUser(req: Request, res: Response){
     const { email, token } =  req.body;
     const user = await this.model.findOne<IUser>({ email });
-    
     if(!user){
       return this.failureRes(400, "User not found", res);
     }
@@ -67,6 +67,14 @@ class AuthController extends BaseController {
     }
     return this.failureRes(500, "Something went wrong", res);
   }
+
+  async getAccessToken(req: Request, res: Response){
+    const { refreshToken } = req.body;
+    //
+    const decoded = this.model.decodeJwt(refreshToken || "");
+  }
+
 }
+
 
 export { AuthController };

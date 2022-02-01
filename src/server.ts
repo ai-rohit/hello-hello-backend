@@ -4,10 +4,12 @@ import cors from "cors";
 import { dbConfig } from "@config";
 import routes from "@routes";
 import { TEXT } from "@constants";
+// import { getIp } from "./helpers/ip.helper";
 
 /**
  * Create server config.
  */
+//getIp();
 const createServer = (): Express => {
   const app: Express = express();
 

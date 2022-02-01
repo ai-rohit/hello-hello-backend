@@ -15,11 +15,6 @@ const profileSchema = new mongoose.Schema<IProfile>({
     avatar: {
         type: String,
     },
-    role: {
-        type: String,
-        required: true,
-        default: "user",
-    },
     bio: {
         type: String,
     },

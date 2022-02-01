@@ -11,6 +11,12 @@ export const verifyLogin = async(req: Request, res: Response, next: NextFunction
     token = req.headers.authorization.split(" ")[1];
     try{
       const decoded: any = jwt.verify(token, process.env.JWT_SECRET as string);
+      if(decoded.type !== "access"){
+        return res.status(403).json({
+          status:"error",
+          message:"Frobidden"
+        })
+      }
       const user = await userModel.findById<IUser>(decoded.user);
   
       if(!user){
