@@ -14,5 +14,5 @@ export interface IModel {
     populate?: IPopulate | IPopulate[]
   ): Promise<T>;
   deleteById<T>(id: string): Promise<T>;
-  decodeJwt? : (token?: string)=> string | JwtPayload;
+  //decodeJwt? : (token?: string)=> string | JwtPayload;
 }
