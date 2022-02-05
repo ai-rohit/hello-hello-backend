@@ -8,10 +8,10 @@ export interface ITokenData {
 
 export interface IUser extends Document {
   email: string;
-  role: string,
+  role: string;
   tokenData?: ITokenData;
   generateJwtTokens(type: string): string;
-  decodeJwt(type: string): string | jwt.JwtPayload
+  decodeJwt(type: string): string | jwt.JwtPayload;
 }
 
 export interface IProfile extends Document {

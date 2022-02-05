@@ -3,7 +3,6 @@ import createServer from "./server";
 import { TEXT } from "@constants";
 
 const startServer = async (): Promise<any> => {
-  // dotenv.config();
   const app = createServer();
 
   const port: number = parseInt(<string>process.env.PORT) || 3000;

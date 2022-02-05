@@ -1,9 +1,9 @@
 import { IUser } from "@interfaces";
 
-declare global{
+declare global {
   namespace Express {
     interface Request {
-      currentUser: IUser
+      currentUser: IUser;
     }
   }
 }
