@@ -2,7 +2,7 @@
 import { Request, Response } from "express";
 import { UserModel, ProfileModel } from "@models";
 import { BaseController } from "./base.controller";
-import { generateRandomToken, mailer } from "@helpers";
+import { generateRandomToken, mailer, verifyJwt } from "@helpers";
 import { IModel, IProfile, ITokenData, IUser } from "@interfaces";
 
 // interface UserMode {
@@ -70,11 +70,31 @@ class AuthController extends BaseController {
 
   async getAccessToken(req: Request, res: Response){
     const { refreshToken } = req.body;
-    //
-    const decoded = this.model.decodeJwt(refreshToken || "");
+    
+    if(!refreshToken){
+      return this.failureRes(400, "Refresh token is requried", res);
+    }
+    let decoded : any;
+    try{
+      decoded = verifyJwt(refreshToken, "refresh");
+    }catch(err){
+      return this.failureRes(404, "The token seems to be invalid", res);
+    }
+    if(decoded){
+      if(decoded.type !== "refresh" ){
+        return this.failureRes(400, "The refresh token seems to be invalid", res);
+      }
+
+      const user = await this.model.findById<IUser>(decoded.user);
+      console.log(user);
+      if(!user) return this.failureRes(404, "something went wrong when getting user", res)
+
+      const accesstoken = user.generateJwtTokens("access");
+      return this.successRes({ accesstoken }, res)
+    }
+    
   }
 
 }
-
 
 export { AuthController };

@@ -22,6 +22,10 @@ const profileSchema = new mongoose.Schema<IProfile>({
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
     },
+    image:{
+        type: String,
+        default: "uploads/default.jpeg"
+    }
     // preference:{
     //     buttonColor:"blue",
     //     mode:"dark"

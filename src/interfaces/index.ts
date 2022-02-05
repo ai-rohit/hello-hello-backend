@@ -21,6 +21,7 @@ export interface IProfile extends Document {
   avatar: string;
   bio: string;
   user: ObjectId;
+  image: string;
 }
 
 export * from "./model.interface";

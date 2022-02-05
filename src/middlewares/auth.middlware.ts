@@ -10,7 +10,16 @@ export const verifyLogin = async(req: Request, res: Response, next: NextFunction
   if(req.headers.authorization && req.headers.authorization.startsWith("Bearer ")){
     token = req.headers.authorization.split(" ")[1];
     try{
-      const decoded: any = jwt.verify(token, process.env.JWT_SECRET as string);
+      let decoded: any;
+
+      try{
+        decoded = jwt.verify(token, process.env.JWT_ACCESS_SECRET as string);
+      }catch(err){
+        return res.status(403).json({
+          status: "error",
+          message: "Access denied"
+        })
+      }
       if(decoded.type !== "access"){
         return res.status(403).json({
           status:"error",
@@ -25,7 +34,7 @@ export const verifyLogin = async(req: Request, res: Response, next: NextFunction
           message:"The user no longer exists"
         })
       }
-  
+      
       req.currentUser = user;
       return next();
     }catch(err){

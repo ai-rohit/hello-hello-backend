@@ -38,13 +38,13 @@ userSchema.methods.generateJwtTokens = function(type: string){
   }
 
   if(type==="access"){
-    return jwt.sign(payload, process.env.JWT_SECRET as string, {
+    return jwt.sign(payload, process.env.JWT_ACCESS_SECRET as string, {
       expiresIn: "15m"
     })
   }
 
   if(type==="refresh"){
-    return jwt.sign(payload, process.env.JWT_SECRET as string, {
+    return jwt.sign(payload, process.env.JWT_REFRESH_SECRET as string, {
       expiresIn: "30d"
     })
   }

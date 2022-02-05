@@ -2,6 +2,7 @@ import { IProfile } from "@interfaces";
 import { ProfileModel } from "@models";
 import { Request, Response } from "express";
 import { BaseController } from "./base.controller";
+import { unlinkSync } from "fs";
 
 class ProfileController extends BaseController{
   constructor(){
@@ -35,8 +36,26 @@ class ProfileController extends BaseController{
   }
 
   async changeAvatar(req: Request, res:Response){
+    console.log(req.file);
+    if(!req.file){
+      return this.failureRes(400, "Image is required for upload", res);
+    }
+    const profile = await this.model.findOne<IProfile>({ user: req.currentUser._id });
+    let result;
+    if(profile){
+      if(profile.image && profile.image !== "uploads/default.jpeg"){
+        unlinkSync(profile.image);
+      }
+      profile.image = req.file?.path;
+      result = await profile.save(); 
+    }else{
+      result = await this.model.create<IProfile>({
+        user: req.currentUser._id,
+        image: req.file.path
+      })
+    }
     return res.json({
-      status:"Working"
+      status:result
     })
   }
 }
