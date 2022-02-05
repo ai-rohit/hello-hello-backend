@@ -1,0 +1,258 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="x-apple-disable-message-reformatting" />
+  <!--[if mso]>
+  <style>
+    table {border-collapse:collapse;border-spacing:0;border:none;margin:0;}
+    div, td {padding:0;}
+    div {margin:0 !important;}
+	</style>
+  <noscript>
+    <xml>
+      <o:OfficeDocumentSettings>
+        <o:PixelsPerInch>96</o:PixelsPerInch>
+      </o:OfficeDocumentSettings>
+    </xml>
+  </noscript>
+  <![endif]-->
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    table,
+    td,
+    div,
+    h1,
+    p {
+      font-family: Arial, sans-serif;
+    }
+
+    @media screen and (max-width: 530px) {
+      .unsub {
+        display: block;
+        padding: 8px;
+        margin-top: 14px;
+        border-radius:
+          6px;
+        background-color: #555555;
+        text-decoration: none !important;
+        font-weight: bold;
+      }
+
+      .col-sml {
+        max-width: 25% !important;
+      }
+
+      .col-lge {
+        max-width: 75% !important;
+      }
+    }
+
+    @media screen and (min-width: 531px) {
+      .col-sml {
+        max-width: 12% !important;
+      }
+
+      .col-lge {
+        max-width: 88% !important;
+      }
+    }
+
+    @media screen and (max-width: 300px) {
+      .col-sml {
+        max-width: 100% !important;
+      }
+
+      .col-lge {
+        max-width: 100% !important;
+      }
+    }
+  </style>
+</head>
+
+<body style="margin: 0; padding: 0; word-spacing: normal; background-color: transparent; ">
+  <div role="article" aria-roledescription="email" lang="en"
+    style="text-size-adjust:100%;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;background-color:#302f35;">
+    <table role="presentation" style="
+        border: none;
+        border-spacing: 0;
+        background-color: #fff;
+        width: 100%;
+      ">
+      <tr>
+        <td align="center" style="padding:0;">
+          <!--[if mso]>
+          <table role="presentation" align="center" style="width:600px;">
+          <tr>
+          <td>
+          <![endif]-->
+          <table role="presentation"
+            style="border:none;border-spacing:0;text-align:left;font-family:Arial,sans-serif;font-size:16px;line-height:22px;color:#363636;">
+            <tr>
+              <td
+                style="padding:35px 30px 0px 30px;font-size:0;background-color:#ffffff;border-bottom:1px solid #f0f0f5;border-color:rgba(201,201,207,.35);">
+                <!--[if mso]>
+                <table role="presentation" width="100%">
+                <tr>
+                <td style="width:145px;" align="left" valign="top">
+                <![endif]-->
+                <div class="col-sml"
+                  style="display:inline-block;width:100%;vertical-align:top;text-align:left;font-family:Arial,sans-serif;font-size:14px;color:#363636;">
+                  <a href="#">
+                    <img width="60" height="60" src="https://prakashpun22.pythonanywhere.com/media/social/logo.jpg"
+                      alt="Logo" style="
+                    width: 60px;
+                    height: 60px;margin-bottom:20px;" />
+                  </a>
+                </div>
+                <!--[if mso]>
+                  </td>
+                  <td style="width:395px;padding-bottom:20px;" valign="top">
+                  <![endif]-->
+                <div class="col-lge"
+                  style="display:inline-block;width:100%;max-width:395px;vertical-align:top;padding-bottom:20px;font-family:Arial,sans-serif;font-size:10px;line-height:22px;color:#363636;">
+                  <h1 style="margin-top:15px;margin-bottom:12px;">Hello Hello</h1>
+                </div>
+                <!--[if mso]>
+                </td>
+                </tr>
+                </table>
+                <![endif]-->
+              </td>
+            </tr>
+            <tr style="margin-bottom: 10px;">
+              <td style=" padding:0px 30px 0px 30px;background-color:#ffffff; text-align: center; ">
+                <h3
+                  style="margin-top:0;margin-bottom:10px;font-size:16px;line-height:32px;font-weight:bold;letter-spacing:-0.02em; text-align: left;">
+                  We noticed a account sigin in from a {{ loginInfo.device }} browser;</h3>
+                <div
+                  style="display:inline-block;vertical-align:top;padding:10px 10px 10px 10px;font-family:Arial,sans-serif;font-size:16px;line-height:22px;color:#363636; border-radius: 5px;">
+                  <div class="col-sml"
+                    style="display:inline-block;width:100%;vertical-align:top;font-family:Arial,sans-serif;font-size:14px;color:#363636;">
+                    <a href="#">
+                      {{#if loginInfo.desktop}}
+                      <img width="50" height="50" src="https://prakashpun22.pythonanywhere.com/media/social/desktop.png"
+                        alt="Logo" style="
+                    width: 50px;
+                    height: 50px;margin-bottom:10px;" />
+                      {{else}}
+                      <img width="50" height="50" src="https://prakashpun22.pythonanywhere.com/media/social/mobile.png"
+                        alt="Logo" style="
+                    width: 50px;
+                    height: 50px;margin-bottom:10px;" />
+                      {{/if}}
+                    </a>
+                  </div>
+
+                  <p style="margin-top:0;margin-bottom:5px;">
+                    {{loginInfo.timeStamp}}
+                  </p>
+
+                  <span style="margin-top:10px;margin-bottom:5px;">
+                  </span> {{loginInfo.device}}</span>
+                  <span style="margin-top:10px;margin-bottom:5px;">
+                    <span style="font-weight: bolder;">&middot;</span>
+                    {{loginInfo.browser}}
+                  </span>
+                  <span style="margin-top:10px;margin-bottom:5px;">
+                    <span style="font-weight: bolder;">&middot;</span>
+                    Pokhara, Nepal
+                  </span>
+                </div>
+                <!--[if mso]>
+                </td>
+                </tr>
+                </table>
+                <![endif]-->
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:0px 30px 10px 30px;background-color:#ffffff;">
+                <h3
+                  style="margin-top:0;margin-bottom:10px;font-size:16px;line-height:32px;font-weight:bold;letter-spacing:-0.02em;">
+                  If this was you, verify your email address,</h3>
+                <div
+                  style="display:inline-block;width:100%;vertical-align:top;font-family:Arial,sans-serif;font-size:16px;line-height:22px;color:#363636;">
+                  <p style="margin-top:0;margin-bottom:12px;">Your
+                    confirmation code is below - enter it in your open browser
+                    window and we'll help you get signed in.</p>
+                  <p style="margin:0; text-align:center;"><a href="#"
+                      style="background: #789ebd; text-decoration: none; padding: 10px 25px; color: #ffffff; border-radius: 4px; display:inline-block; mso-padding-alt:0;text-underline-color:#ff3884; letter-spacing: 4px;">
+                      <!--[if mso]><i style="letter-spacing: 25px;mso-font-width:-100%;mso-text-raise:20pt">&nbsp;</i><![endif]--><span
+                        style="mso-text-raise:10pt;font-weight:bold;">{{code}}</span>
+                      <!--[if mso]><i style="letter-spacing: 25px;mso-font-width:-100%">&nbsp;</i><![endif]-->
+                    </a></p>
+                  <p style="margin-top:10px;margin-bottom:10px;">
+                    If you didn't request this email, there's nothing to worry
+                    about - your can safely ignore it.</p>
+                </div>
+                <!--[if mso]>
+                </td>
+                </tr>
+                </table>
+                <![endif]-->
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:30px;text-align:center;font-size:12px;background-color:#404040;color:#cccccc;">
+                <div style="background-color: #404040;">
+                  <p style="margin:0 0 8px 0;">
+                    <!--[if mso]>
+                    &nbsp;&nbsp;
+                  <![endif]-->
+                    <a href="http://www.facebook.com/" style="text-decoration:none;">
+                      <img src="https://prakashpun22.pythonanywhere.com/media/social/facebook.png" width="30"
+                        height="30" alt="f" style="display:inline-block;color:#cccccc; margin: 5px;" />
+                    </a>
+                    <!--[if mso]>
+                    &nbsp;&nbsp;
+                    <![endif]-->
+
+                    <a href="http://www.twitter.com/" style="text-decoration:none;">
+                      <img src="https://prakashpun22.pythonanywhere.com/media/social/github.png" width="30" height="30"
+                        alt="t" style="display:inline-block;color:#cccccc; margin: 5px;" />
+                    </a>
+                    <!--[if mso]>
+                      &nbsp;&nbsp;
+                      <![endif]-->
+                    <a href="http://www.twitter.com/" style="text-decoration:none; ">
+                      <img src="https://prakashpun22.pythonanywhere.com/media/social/linkelin.png" width="30"
+                        height="30" alt="t" style="display:inline-block;color:#cccccc;margin: 5px;" />
+                    </a>
+                    <!--[if mso]>
+                        &nbsp;&nbsp;
+                        <![endif]-->
+                    <a href="http://www.twitter.com/" style="text-decoration:none;">
+                      <img src="https://prakashpun22.pythonanywhere.com/media/social/instagram.png" width="30"
+                        height="30" alt="t" style="display:inline-block;color:#cccccc; margin: 5px;" />
+                    </a>
+                    <!--[if mso]>
+                          &nbsp;&nbsp;
+                          <![endif]-->
+                  </p>
+                  <p style="margin:0;font-size:14px;line-height:20px;">&reg;
+                    PRP, Paila Tech Inc, 2021<br /><a class="unsub" href="http://www.example.com/"
+                      style="color:#cccccc;text-decoration:underline;">Unsubscribe instantly</a></p>
+                </div>
+              </td>
+            </tr>
+          </table>
+          <!--[if mso]>
+          </td>
+          </tr>
+          </table>
+          <![endif]-->
+        </td>
+      </tr>
+    </table>
+  </div>
+
+</body>
+
+</html>

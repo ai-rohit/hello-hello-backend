@@ -1,5 +1,6 @@
 import express, { Express, Response, Request } from "express";
 import mongoose from "mongoose";
+import path from "path";
 import cors from "cors";
 import { dbConfig } from "@config";
 import routes from "@routes";
@@ -16,6 +17,7 @@ const createServer = (): Express => {
   app.use(cors());
 
   app.use(express.json());
+  app.set("views", path.join(__dirname, "views"));
 
   mongoose
     .connect(dbConfig.url, dbConfig.options)
@@ -33,12 +35,13 @@ const createServer = (): Express => {
     res.send(ip);
   })
   app.use("/api/v1", routes);
-  app.use("*", async (req: Request, res: Response)=>{
+  app.use("/uploads", express.static("uploads"))
+  app.use("*", async (req: Request, res: Response) => {
     return res.status(404).json({
-      status:"error",
-      message:"Invalid API endpoint"
-    })
-  })
+      status: "error",
+      message: "Invalid API endpoint",
+    });
+  });
   return app;
 };
 

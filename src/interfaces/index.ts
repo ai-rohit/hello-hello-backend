@@ -24,5 +24,13 @@ export interface IProfile extends Document {
   image: string;
 }
 
+export interface MailParam {
+  from: string;
+  to: string;
+  subject: string;
+  message: string;
+  data: string;
+}
+
 export * from "./model.interface";
 export * from "./populate.interface";

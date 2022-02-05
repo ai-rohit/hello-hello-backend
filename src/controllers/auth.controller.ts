@@ -21,15 +21,24 @@ class AuthController extends BaseController {
     const tokenData: ITokenData = {
       token: generateRandomToken(),
       expiresIn: new Date(new Date().getTime() + 600000),
-    }
-    
+    };
+
     if (user) {
       user.tokenData = tokenData;
-      mailer.sendMail({ from:"abc", to:user.email, subject:"User verification mail", message:"Verify yourself using token", data:tokenData.token })
+      mailer.sendMail({
+        from: "Hello Hello Chat",
+        to: user.email,
+        subject: "User verification mail",
+        message: "Verify yourself using token",
+        data: tokenData.token,
+      });
       await user.save();
-      return this.successRes({
-        mailToCheck: user.email
-      }, res);
+      return this.successRes(
+        {
+          mailToCheck: user.email,
+        },
+        res
+      );
     }
     const result = await this.model.create<IUser>({
       email,
@@ -41,8 +50,8 @@ class AuthController extends BaseController {
     }, res)
   }
 
-  async verifyUser(req: Request, res: Response){
-    const { email, token } =  req.body;
+  async verifyUser(req: Request, res: Response) {
+    const { email, token } = req.body;
     const user = await this.model.findOne<IUser>({ email });
     if(!user){
       return this.failureRes(400, "User not found", res);

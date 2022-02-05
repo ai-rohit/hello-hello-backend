@@ -1,37 +1,58 @@
+import hbs from "nodemailer-express-handlebars";
 import nodemailer from "nodemailer";
+import path from "path";
+import { MailParam } from "@interfaces";
 
-interface MailParam{
-  from: string;
-  to: string;
-  subject: string;
-  message: string;
-  data: string;
-}
-class Mailer{
+class Mailer {
   private transporter;
-  constructor(){
+  constructor() {
     this.transporter = nodemailer.createTransport({
-      service:"Gmail",
-      auth:{
+      service: "Gmail",
+      auth: {
         user: process.env.MAIL_USER,
-        pass: process.env.MAIL_PASSWORD
-      }
-    })
+        pass: process.env.MAIL_PASSWORD,
+      },
+    });
+
+    const handlebarOptions = {
+      viewEngine: {
+        extName: ".handlebars",
+        partialsDir: path.join(__dirname, "../views/"),
+        layoutsDir: path.join(__dirname, "../views/"),
+        defaultLayout: "",
+      },
+      viewPath: path.join(__dirname, "../views/"),
+      extName: ".handlebars",
+    };
+
+    this.transporter.use("compile", hbs(handlebarOptions));
   }
 
-  async sendMail({ from, to, subject , message, data }:MailParam){
+  async sendMail({ from, to, subject, message, data }: MailParam) {
     const mailData = {
       from,
       to,
       subject,
+      template: "verify",
       text: message,
-      html: `<p>Password Reset Token</p>+Token:<p>User Verification Token</p>${ data }`
-    }
+      context: {
+        email: to,
+        code: data,
+        loginInfo: {
+          device: "Windows",
+          desktop: false,
+          mobile: true,
+          timeStamp: "January 14 , 2022, 5:42 AM (GMT)",
+          browser: "Chrome",
+          location: "Pokhara, Nepal",
+        },
+      },
+    };
 
-    try{
+    try {
       await this.transporter.sendMail(mailData);
       return true;
-    }catch(ex){
+    } catch (ex) {
       console.log(ex);
       return false;
     }
