@@ -1,3 +1,4 @@
+import jwt from "jsonwebtoken";
 import { Document, ObjectId } from "mongoose";
 
 export interface ITokenData {
@@ -7,7 +8,10 @@ export interface ITokenData {
 
 export interface IUser extends Document {
   email: string;
+  role: string,
   tokenData?: ITokenData;
+  generateJwtTokens(type: string): string;
+  decodeJwt(type: string): string | jwt.JwtPayload
 }
 
 export interface IProfile extends Document {
@@ -15,9 +19,9 @@ export interface IProfile extends Document {
   lastName: string;
   username: string;
   avatar: string;
-  role: string;
   bio: string;
   user: ObjectId;
+  image: string;
 }
 
 export interface MailParam {
