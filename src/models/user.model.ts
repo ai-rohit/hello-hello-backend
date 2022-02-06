@@ -39,7 +39,7 @@ userSchema.methods.generateJwtTokens = function (type: string) {
 
   if (type === "access") {
     return jwt.sign(payload, process.env.JWT_ACCESS_SECRET as string, {
-      expiresIn: "15m",
+      expiresIn: "2d",
     });
   }
 

@@ -83,7 +83,7 @@ class AuthController extends BaseController {
     const { refreshToken } = req.body;
 
     if (!refreshToken) {
-      return this.failureRes(400, "Refresh token is requried", res);
+      return this.failureRes(400, "Refresh token is required", res);
     }
     let decoded: any;
     try {
