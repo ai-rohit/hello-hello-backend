@@ -5,9 +5,6 @@ import { BaseController } from "./base.controller";
 import { generateRandomToken, mailer, verifyJwt } from "@helpers";
 import { IModel, IProfile, ITokenData, IUser } from "@interfaces";
 
-// interface UserMode {
-//   decodeJwt: (token: string) => any; 
-// }
 class AuthController extends BaseController {
   public profileModel: IModel;
   constructor() {
@@ -45,27 +42,32 @@ class AuthController extends BaseController {
       tokenData,
     });
     //send mail
-    return this.successRes({
-      mailToCheck: result.email
-    }, res)
+    return this.successRes(
+      {
+        mailToCheck: result.email,
+      },
+      res
+    );
   }
 
   async verifyUser(req: Request, res: Response) {
     const { email, token } = req.body;
     const user = await this.model.findOne<IUser>({ email });
-    if(!user){
+    if (!user) {
       return this.failureRes(400, "User not found", res);
     }
-    if(user.tokenData){
-      if(user.tokenData.token === token && user.tokenData.expiresIn > token){
+    if (user.tokenData) {
+      if (user.tokenData.token === token && user.tokenData.expiresIn > token) {
         //create jwt
         let hasProfile = false;
         const accessToken: string = user.generateJwtTokens("access");
         const refreshToken: string = user.generateJwtTokens("refresh");
 
-        const userProfile = await this.profileModel.findOne<IProfile>({ user: user._id });
+        const userProfile = await this.profileModel.findOne<IProfile>({
+          user: user._id,
+        });
 
-        if(userProfile) hasProfile = true;
+        if (userProfile) hasProfile = true;
 
         //removing user token data
         user.tokenData = undefined;
@@ -77,33 +79,40 @@ class AuthController extends BaseController {
     return this.failureRes(500, "Something went wrong", res);
   }
 
-  async getAccessToken(req: Request, res: Response){
+  async getAccessToken(req: Request, res: Response) {
     const { refreshToken } = req.body;
-    
-    if(!refreshToken){
-      return this.failureRes(400, "Refresh token is requried", res);
+
+    if (!refreshToken) {
+      return this.failureRes(400, "Refresh token is required", res);
     }
-    let decoded : any;
-    try{
+    let decoded: any;
+    try {
       decoded = verifyJwt(refreshToken, "refresh");
-    }catch(err){
+    } catch (err) {
       return this.failureRes(404, "The token seems to be invalid", res);
     }
-    if(decoded){
-      if(decoded.type !== "refresh" ){
-        return this.failureRes(400, "The refresh token seems to be invalid", res);
+    if (decoded) {
+      if (decoded.type !== "refresh") {
+        return this.failureRes(
+          400,
+          "The refresh token seems to be invalid",
+          res
+        );
       }
 
       const user = await this.model.findById<IUser>(decoded.user);
       console.log(user);
-      if(!user) return this.failureRes(404, "something went wrong when getting user", res)
+      if (!user)
+        return this.failureRes(
+          404,
+          "something went wrong when getting user",
+          res
+        );
 
       const accesstoken = user.generateJwtTokens("access");
-      return this.successRes({ accesstoken }, res)
+      return this.successRes({ accesstoken }, res);
     }
-    
   }
-
 }
 
 export { AuthController };

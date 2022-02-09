@@ -10,9 +10,9 @@ const userSchema = new mongoose.Schema<IUser>(
       required: true,
     },
     role: {
-      type:String,
-      default:"user",
-      enum:["admin", "user"]
+      type: String,
+      default: "user",
+      enum: ["admin", "user"],
     },
     tokenData: {
       token: {
@@ -27,37 +27,40 @@ const userSchema = new mongoose.Schema<IUser>(
 );
 
 interface jwtPayload {
-  user: string,
-  type: string
+  user: string;
+  type: string;
 }
 
-userSchema.methods.generateJwtTokens = function(type: string){
+userSchema.methods.generateJwtTokens = function (type: string) {
   const payload: jwtPayload = {
     user: this._id,
-    type
-  }
+    type,
+  };
 
-  if(type==="access"){
+  if (type === "access") {
     return jwt.sign(payload, process.env.JWT_ACCESS_SECRET as string, {
-      expiresIn: "15m"
-    })
+      expiresIn: "2d",
+    });
   }
 
-  if(type==="refresh"){
+  if (type === "refresh") {
     return jwt.sign(payload, process.env.JWT_REFRESH_SECRET as string, {
-      expiresIn: "30d"
-    })
+      expiresIn: "30d",
+    });
   }
-}
+};
 
 const User = mongoose.model<IUser>("User", userSchema);
 export class UserModel extends BaseModel {
   constructor() {
     super(User);
   }
-  
-  decodeJwt(token: string){
-    const decoded: string | undefined | any = jwt.verify(token, process.env.JWT_SECRET as string);
+
+  decodeJwt(token: string) {
+    const decoded: string | undefined | any = jwt.verify(
+      token,
+      process.env.JWT_SECRET as string
+    );
     return decoded;
   }
 }

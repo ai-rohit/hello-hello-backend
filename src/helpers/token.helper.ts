@@ -8,13 +8,16 @@ function generateRandomToken(): string {
   return (Math.floor(Math.random() * 90000) + 100000).toString();
 }
 /**
- * 
- * @param token 
+ *
+ * @param token
  * @returns payload
  */
-function verifyJwt(token: string, tokenType: string){
-  const secret = tokenType === "access"? process.env.JWT_ACCESS_SECRET as string: process.env.JWT_REFRESH_SECRET as string
-  return verify(token, secret)
+function verifyJwt(token: string, tokenType: string) {
+  const secret =
+    tokenType === "access"
+      ? (process.env.JWT_ACCESS_SECRET as string)
+      : (process.env.JWT_REFRESH_SECRET as string);
+  return verify(token, secret);
 }
 
 export { generateRandomToken, verifyJwt };
