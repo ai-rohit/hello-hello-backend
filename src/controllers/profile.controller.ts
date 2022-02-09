@@ -9,11 +9,12 @@ class ProfileController extends BaseController {
     super(new ProfileModel());
   }
 
-  async createUserProfile(req: Request, res: Response) {
-    const newProfile = await this.model.create<IProfile>({
-      ...req.body,
-      user: req.currentUser._id,
-    });
+  async createUserProfile(req: Request, res: Response){
+    const profile = await this.model.findOne<IProfile>({ user: req.currentUser._id });
+    if(profile){
+      return this.failureRes(401, "The user already has a profile.", res);
+    }
+    const newProfile = await this.model.create<IProfile>({ ...req.body, user: req.currentUser._id });
     return this.successRes(newProfile, res);
   }
 
@@ -63,9 +64,7 @@ class ProfileController extends BaseController {
         image: req.file.path,
       });
     }
-    return res.json({
-      status: result,
-    });
+    this.successRes(result, res);
   }
 }
 
