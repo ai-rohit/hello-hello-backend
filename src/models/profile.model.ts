@@ -26,6 +26,10 @@ const profileSchema = new mongoose.Schema<IProfile>({
     type: String,
     default: "uploads/default.jpeg",
   },
+  phoneNumber: {
+    type: String,
+    required: false,
+  },
   // preference:{
   //     buttonColor:"blue",
   //     mode:"dark"
