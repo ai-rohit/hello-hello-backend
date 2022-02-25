@@ -9,10 +9,7 @@ export class BaseController {
   }
 
   successRes(data: any, res: Response) {
-    return res.status(200).json({
-      status: "success",
-      data,
-    });
+    return res.status(200).json(data);
   }
 
   failureRes(status = 500, message: any, res: Response) {
