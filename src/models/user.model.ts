@@ -63,4 +63,13 @@ export class UserModel extends BaseModel {
     );
     return decoded;
   }
+
+  // static buildQuery(req: Request){
+  //   const query = req.query;
+  //   let filterQuery: any = {};
+  //   if(query.email){
+  //     filterQuery.email = query.email;
+  //   }
+  //   if()
+  // }
 }

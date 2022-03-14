@@ -24,6 +24,27 @@ export interface IProfile extends Document {
   image: string;
 }
 
+export interface IFriendReq extends Document {
+  sender: ObjectId;
+  receiver: ObjectId;
+  status: string;
+}
+
+interface IBlockStatus {
+  isBlocked: boolean;
+  blockedBy: ObjectId;
+
+}
+
+export interface IFriendShip extends Document {
+  friend1: ObjectId;
+  friend2: ObjectId;
+  status: string;
+  blockedStatus: IBlockStatus;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export interface MailParam {
   from: string;
   to: string;

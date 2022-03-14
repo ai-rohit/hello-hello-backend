@@ -25,7 +25,7 @@ const profileSchema = new mongoose.Schema<IProfile>({
   image: {
     type: String,
     default: "uploads/default.jpeg",
-  },
+  }
   // preference:{
   //     buttonColor:"blue",
   //     mode:"dark"
