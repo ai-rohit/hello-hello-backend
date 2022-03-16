@@ -22,7 +22,8 @@
       "@constants": ["./src/constants"],
       "@interfaces": ["./src/interfaces"],
       "@middlewares": ["./src/middlewares"],
-      "@models": ["./src/models"]
+      "@models": ["./src/models"],
+      "@validators": ["./src/validators"]
     }
   },
   "include": ["src", "src/**/*.ts"],

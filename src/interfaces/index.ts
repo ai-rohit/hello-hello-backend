@@ -22,6 +22,7 @@ export interface IProfile extends Document {
   bio: string;
   user: ObjectId;
   image: string;
+  phoneNumber: string;
 }
 
 export interface IFriendReq extends Document {

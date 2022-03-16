@@ -23,7 +23,8 @@ class ProfileController extends BaseController {
       { user: req.currentUser._id },
       { path: "user" }
     );
-    this.successRes(profile, res);
+
+    return this.successRes(profile, res);
   }
 
   async updateProfile(req: Request, res: Response) {
