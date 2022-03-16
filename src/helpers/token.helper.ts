@@ -25,16 +25,16 @@ function verifyJwt(token: string, tokenType: string) {
  * @param data
  * @return encrypted data
  */
-function encryptData(data: string | any):string{
+function encryptData(data: string | any): string {
   const iv = CryptoJs.enc.Base64.parse("");
   const key = CryptoJs.SHA256(process.env.HASH_SECRET as string);
 
   const encryptedString: string = CryptoJs.AES.encrypt(data, key, {
     iv,
     mode: CryptoJs.mode.CBC,
-    padding: CryptoJs.pad.Pkcs7
+    padding: CryptoJs.pad.Pkcs7,
   }).toString();
-  
+
   return encryptedString;
 }
 
@@ -42,16 +42,16 @@ function encryptData(data: string | any):string{
  * @param encrypted
  * @return decryptedData
  */
-function decryptData(encrypted: string | any):string{
+function decryptData(encrypted: string | any): string {
   const iv = CryptoJs.enc.Base64.parse("");
   const key = CryptoJs.SHA256(process.env.HASH_SECRET as string);
 
   const decryptedString = CryptoJs.AES.decrypt(encrypted, key, {
     iv,
     mode: CryptoJs.mode.CBC,
-    padding: CryptoJs.pad.Pkcs7
+    padding: CryptoJs.pad.Pkcs7,
   }).toString(CryptoJs.enc.Utf8);
-  
+
   return decryptedString;
 }
 

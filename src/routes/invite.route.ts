@@ -1,4 +1,12 @@
-import { sendFriendReq, acceptRequest, rejectRequest, getAllInvites, getSingleInvites, getSentInvites, deleteRequest } from "../controllers";
+import {
+  sendFriendReq,
+  acceptRequest,
+  rejectRequest,
+  getAllInvites,
+  getSingleInvites,
+  getSentInvites,
+  deleteRequest,
+} from "../controllers";
 import { Router } from "express";
 import { handleErrors, wrapSync } from "@helpers";
 import { singleInviteRequests } from "../validators";
@@ -8,17 +16,23 @@ const inviteRouter = Router();
 
 const singleInvite = Router({ mergeParams: true });
 
-inviteRouter.get("/", verifyLogin, wrapSync(getAllInvites))
+inviteRouter.get("/", verifyLogin, wrapSync(getAllInvites));
 inviteRouter.get("/sent", verifyLogin, wrapSync(getSentInvites));
 
 inviteRouter.post("/", verifyLogin, wrapSync(sendFriendReq));
 
-inviteRouter.use("/:inviteId", singleInviteRequests(), handleErrors, verifyLogin, singleInvite);
+inviteRouter.use(
+  "/:inviteId",
+  singleInviteRequests(),
+  handleErrors,
+  verifyLogin,
+  singleInvite
+);
 
-singleInvite.get("/", verifyLogin ,wrapSync(getSingleInvites));
+singleInvite.get("/", verifyLogin, wrapSync(getSingleInvites));
 
 singleInvite.patch("/accept", verifyLogin, wrapSync(acceptRequest));
 singleInvite.patch("/reject", verifyLogin, wrapSync(rejectRequest));
-singleInvite.delete("/", verifyLogin, wrapSync(deleteRequest))
+singleInvite.delete("/", verifyLogin, wrapSync(deleteRequest));
 
 export default inviteRouter;

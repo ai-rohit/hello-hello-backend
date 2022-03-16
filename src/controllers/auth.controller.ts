@@ -31,14 +31,14 @@ class AuthController extends BaseController {
       });
       await user.save();
 
-      const dataToEnc: string = user.email+":"+new Date();
-    
+      const dataToEnc: string = user.email + ":" + new Date();
+
       const encryptedString = encryptData(dataToEnc);
 
       return this.successRes(
         {
           mailToCheck: user.email,
-          hashedToken: encryptedString
+          hashedToken: encryptedString,
         },
         res
       );
