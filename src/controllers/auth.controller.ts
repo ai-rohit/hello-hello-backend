@@ -2,7 +2,7 @@
 import { Request, Response } from "express";
 import { UserModel, ProfileModel } from "@models";
 import { BaseController } from "./base.controller";
-import { generateRandomToken, mailer, verifyJwt } from "@helpers";
+import { encryptData, generateRandomToken, mailer, verifyJwt } from "@helpers";
 import { IModel, IProfile, ITokenData, IUser } from "@interfaces";
 
 class AuthController extends BaseController {
@@ -30,9 +30,15 @@ class AuthController extends BaseController {
         data: tokenData.token,
       });
       await user.save();
+
+      const dataToEnc: string = user.email+":"+new Date();
+    
+      const encryptedString = encryptData(dataToEnc);
+
       return this.successRes(
         {
           mailToCheck: user.email,
+          hashedToken: encryptedString
         },
         res
       );
@@ -42,6 +48,7 @@ class AuthController extends BaseController {
       tokenData,
     });
     //send mail
+
     return this.successRes(
       {
         mailToCheck: result.email,
