@@ -1,9 +1,8 @@
-// import {User} from "../models";
 import { Request, Response } from "express";
-import { UserModel, ProfileModel } from "@models";
-import { BaseController } from "./base.controller";
 import { encryptData, generateRandomToken, mailer, verifyJwt } from "@helpers";
 import { IModel, IProfile, ITokenData, IUser } from "@interfaces";
+import { UserModel, ProfileModel } from "@models";
+import { BaseController } from "./base.controller";
 
 class AuthController extends BaseController {
   public profileModel: IModel;

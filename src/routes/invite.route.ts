@@ -1,3 +1,4 @@
+import { Router } from "express";
 import {
   sendFriendReq,
   acceptRequest,
@@ -6,10 +7,9 @@ import {
   getSingleInvites,
   getSentInvites,
   deleteRequest,
-} from "../controllers";
-import { Router } from "express";
+} from "@controllers";
+import { singleInviteRequests } from "@validators";
 import { handleErrors, wrapSync } from "@helpers";
-import { singleInviteRequests } from "../validators";
 import { verifyLogin } from "@middlewares";
 
 const inviteRouter = Router();

@@ -24,16 +24,6 @@ function validateProfileData(): Array<ValidationChain> {
       .withMessage("Last name must be made of alphabet")
       .trim()
       .escape(),
-    body("username")
-      .exists()
-      .withMessage("User name is missing")
-      .not()
-      .isEmpty()
-      .withMessage("username is required")
-      .isString()
-      .withMessage("username must be made of alphabet")
-      .trim()
-      .escape(),
   ];
 }
 

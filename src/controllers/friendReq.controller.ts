@@ -1,6 +1,6 @@
-import { IUser } from "@interfaces";
-import { UserModel, FriendReq, FriendShip } from "@models";
 import { Request, Response } from "express";
+import { UserModel, FriendReq, FriendShip } from "@models";
+import { IUser } from "@interfaces";
 
 //add sender and requester data in friendReq model with status as pending
 export const sendFriendReq = async (req: Request, res: Response) => {

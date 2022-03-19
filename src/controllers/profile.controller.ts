@@ -1,5 +1,5 @@
-import { unlinkSync } from "fs";
 import { Request, Response } from "express";
+import { unlinkSync } from "fs";
 import { IProfile } from "@interfaces";
 import { ProfileModel } from "@models";
 import { BaseController } from "./base.controller";

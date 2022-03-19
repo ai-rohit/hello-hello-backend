@@ -1,5 +1,5 @@
 import { Response } from "express";
-import { IModel } from "../interfaces";
+import { IModel } from "@interfaces";
 
 export class BaseController {
   public model: IModel;

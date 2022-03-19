@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-import { IUser } from "../interfaces";
-import { BaseModel } from "./base.model";
 import jwt from "jsonwebtoken";
+import { IUser } from "@interfaces";
+import { BaseModel } from "./base.model";
 
 const userSchema = new mongoose.Schema<IUser>(
   {

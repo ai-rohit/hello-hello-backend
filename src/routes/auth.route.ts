@@ -1,6 +1,6 @@
-import { handleErrors, wrapSync } from "@helpers";
 import { Router, Request, Response } from "express";
-import { validateEmail, validateEmailVerification } from "../validators";
+import { validateEmail, validateEmailVerification } from "@validators";
+import { handleErrors, wrapSync } from "@helpers";
 import { AuthController } from "@controllers";
 
 const authRouter = Router();

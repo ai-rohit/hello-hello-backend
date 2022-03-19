@@ -1,8 +1,8 @@
 import { Router, Request, Response } from "express";
-import { verifyLogin } from "@middlewares";
-import { ProfileController } from "@controllers";
-import { validateProfileData, validateProfileForUpdate } from "../validators";
+import { validateProfileData, validateProfileForUpdate } from "@validators";
 import { handleErrors, uploadImage, wrapSync } from "@helpers";
+import { ProfileController } from "@controllers";
+import { verifyLogin } from "@middlewares";
 
 const profileRouter = Router();
 
