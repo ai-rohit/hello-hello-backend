@@ -78,6 +78,18 @@ class AuthController extends BaseController {
         //removing user token data
         user.tokenData = undefined;
         await user.save();
+        res.cookie("accessToken", accessToken, {
+          expires: new Date(Date.now() + 2 * 36000000),
+          httpOnly: true,
+          secure: true,
+          sameSite: "lax",
+        });
+        res.cookie("refreshToken", refreshToken, {
+          expires: new Date(Date.now() + 2 * 36000000),
+          httpOnly: true,
+          secure: true,
+          sameSite: "lax",
+        });
         return this.successRes({ accessToken, refreshToken, hasProfile }, res);
       }
       return this.failureRes(400, "Sorry, token doesn't match", res);
