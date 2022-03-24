@@ -22,9 +22,9 @@ export const verifyLogin = async (
       try {
         decoded = jwt.verify(token, process.env.JWT_ACCESS_SECRET as string);
       } catch (err) {
-        return res.status(403).json({
-          status: "error",
-          message: "Access denied",
+        return res.status(401).json({
+          status: "token_not_valid",
+          message: "Given token is invalid or expired",
         });
       }
       if (decoded.type !== "access") {
@@ -58,3 +58,34 @@ export const verifyLogin = async (
     });
   }
 };
+
+/**
+  * @description access token expired response
+  * 401 unauthorized
+  {
+      "detail": "Given token not valid for any token type",
+      "code": "token_not_valid",
+      "messages": [
+          {
+              "token_class": "AccessToken",
+              "token_type": "access",
+              "message": "Token is invalid or expired"
+          }
+      ]
+  }
+ */
+/**
+ * @description refresh token endpoint response
+ * {
+      "access": "jwt token"
+  }
+*/
+
+/**
+  * @description refresh token expired response
+  {
+    "refresh": [
+      "This field is required."
+    ]
+  }
+ */
