@@ -46,6 +46,26 @@ export interface IFriendShip extends Document {
   updatedAt: Date;
 }
 
+export interface IRoom extends Document {
+  name: string;
+  participants: Array<ObjectId>;
+  isDeleted: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface IMessage extends Document {
+  message?: string;
+  messageType:string;
+  sender: ObjectId;
+  // receiver: ObjectId;
+  seen: Array<ObjectId>;
+  roomId: ObjectId;
+  attachment?: string;
+  image?: string;
+  createdAt: Date;
+  updatedAt: Date; 
+}
 export interface MailParam {
   from: string;
   to: string;

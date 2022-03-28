@@ -5,20 +5,20 @@ import cors from "cors";
 import { dbConfig } from "@config";
 import routes from "@routes";
 import { TEXT } from "@constants";
+
 // import { getIp } from "./helpers/ip.helper";
 
 /**
  * Create server config.
  */
 //getIp();
-const createServer = (): Express => {
+const initializeServer = (): Express => {
   const app: Express = express();
-
   app.use(cors());
 
   app.use(express.json());
   app.set("views", path.join(__dirname, "views"));
-
+  app.use("/public", express.static("public"));
   mongoose
     .connect(dbConfig.url, dbConfig.options)
     .then(() => {
@@ -45,4 +45,4 @@ const createServer = (): Express => {
   return app;
 };
 
-export default createServer;
+export default initializeServer;

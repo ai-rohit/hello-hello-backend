@@ -32,6 +32,7 @@
     "nodemailer": "^6.7.2",
     "nodemailer-express-handlebars": "^4.0.0",
     "public-ip": "^5.0.0",
+    "socket.io": "^4.4.1",
     "ts-node": "^10.4.0",
     "ts-node-dev": "^1.1.8",
     "tsconfig-paths": "^3.12.0"
