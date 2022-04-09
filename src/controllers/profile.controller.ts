@@ -33,7 +33,7 @@ class ProfileController extends BaseController {
   }
 
   async updateProfile(req: Request, res: Response) {
-    const { firstName, lastName, username, bio } = req.body;
+    const { firstName, lastName, username, bio, phone } = req.body;
     const profile = await this.model.findOne<IProfile>({
       user: req.currentUser._id,
     });
@@ -43,7 +43,26 @@ class ProfileController extends BaseController {
 
     if (firstName) profile.firstName = firstName;
     if (lastName) profile.lastName = lastName;
-    if (username) profile.username = username;
+    if (username){
+      const userWithUsernm = await this.model.findOne<IProfile>({
+        username
+      })
+      if(!userWithUsernm){
+        profile.username = username;
+      }else{
+        return this.failureRes(400, "Username already taken", res);
+      }
+    } 
+    if (phone){
+      const userWithPhone = await this.model.findOne<IProfile>({
+        phoneNumber: phone
+      })
+      if(!userWithPhone){
+        profile.phoneNumber = phone;
+      }else{
+        return this.failureRes(400, "Phone number already in use", res);
+      }
+    } 
     if (bio) profile.bio = bio;
 
     const result: IProfile = await profile.save();

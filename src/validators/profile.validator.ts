@@ -48,9 +48,15 @@ function validateProfileForUpdate(): Array<ValidationChain> {
     body("username")
       .optional()
       .isString()
-      .withMessage("username must be made of alphabet")
+      .withMessage("Invalid value for username")
       .trim()
       .escape(),
+    body("phone")
+      .optional()
+      .isMobilePhone("ne-NP")
+      .withMessage("Invalid phone number")
+      .trim()
+      .escape()
   ];
 }
 
