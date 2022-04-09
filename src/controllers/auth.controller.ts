@@ -47,10 +47,11 @@ class AuthController extends BaseController {
       tokenData,
     });
     //send mail
-
+    const dataToEncrypt: string = result.email + ":"+ new Date();
     return this.successRes(
       {
         mailToCheck: result.email,
+        hashedToken: encryptData(dataToEncrypt)
       },
       res
     );

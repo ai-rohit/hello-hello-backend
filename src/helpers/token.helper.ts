@@ -6,7 +6,7 @@ import CryptoJs from "crypto-js";
   @returns Random string
  */
 function generateRandomToken(): string {
-  return (Math.floor(Math.random() * 90000) + 100000).toString();
+  return (Math.floor(Math.random() * 900000) + 100000).toString();
 }
 /**
  *
