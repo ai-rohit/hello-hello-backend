@@ -13,45 +13,50 @@ class AuthController extends BaseController {
 
   async login(req: Request, res: Response) {
     const { email } = req.body;
-    const user = await this.model.findOne<IUser>({ email: email });
+    let user = await this.model.findOne<IUser>({ email: email });
     const tokenData: ITokenData = {
       token: generateRandomToken(),
       expiresIn: new Date(new Date().getTime() + 600000),
     };
 
+    const mailPayload = {
+      from: "Hello Hello Chat",
+      subject: "User verification mail",
+      message: "Verify yourself using token",
+      data: tokenData.token,
+    }
+
+    let mailToCheck ="";
+    let encryptedString=""
+
     if (user) {
       user.tokenData = tokenData;
       mailer.sendMail({
-        from: "Hello Hello Chat",
-        to: user.email,
-        subject: "User verification mail",
-        message: "Verify yourself using token",
-        data: tokenData.token,
+        ...mailPayload,
+        to: user.email
       });
       await user.save();
-
-      const dataToEnc: string = user.email + ":" + new Date();
-
-      const encryptedString = encryptData(dataToEnc);
-
-      return this.successRes(
-        {
-          mailToCheck: user.email,
-          hashedToken: encryptedString,
-        },
-        res
-      );
+    }else{
+      user = await this.model.create<IUser>({
+        email,
+        tokenData,
+      });
+      //send mail
     }
-    const result = await this.model.create<IUser>({
-      email,
-      tokenData,
-    });
-    //send mail
-    const dataToEncrypt: string = result.email + ":"+ new Date();
+
+    mailer.sendMail({
+      ...mailPayload,
+      to: user.email
+    })
+
+    const dataToEnc: string = user.email + ":" + new Date();
+    encryptedString = encryptData(dataToEnc);
+    mailToCheck = user.email;
+
     return this.successRes(
       {
-        mailToCheck: result.email,
-        hashedToken: encryptData(dataToEncrypt)
+        mailToCheck,
+        hashedToken: encryptedString,
       },
       res
     );
