@@ -1,10 +1,32 @@
 import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
 import { IUser } from "@interfaces";
-import { BaseModel } from "./base.model";
 
 const userSchema = new mongoose.Schema<IUser>(
   {
+    firstName: {
+      type: String,
+    },
+    lastName: {
+      type: String,
+    },
+    username: {
+      type: String,
+    },
+    avatar: {
+      type: String,
+    },
+    bio: {
+      type: String,
+    },
+    image: {
+      type: String,
+      default: "uploads/default.jpeg",
+    },
+    phoneNumber: {
+      type: String,
+      required: false,
+    },
     email: {
       type: String,
       required: true,
@@ -23,8 +45,21 @@ const userSchema = new mongoose.Schema<IUser>(
       },
     },
   },
-  { timestamps: true }
+  { timestamps: true,
+    toJSON: {
+      virtuals: true
+    },
+    toObject: {
+      virtuals: true
+    } 
+  }
 );
+
+// userSchema.virtual("profile", {
+//   ref:"Profile",
+//   foreignField:"user",
+//   localField:"_id"
+// })
 
 interface jwtPayload {
   user: string;
@@ -50,26 +85,26 @@ userSchema.methods.generateJwtTokens = function (type: string) {
   }
 };
 
-const User = mongoose.model<IUser>("User", userSchema);
-export class UserModel extends BaseModel {
-  constructor() {
-    super(User);
+userSchema.statics.buildFilterQuery = (req)=>{
+  const { query } = req;
+  let filter: any = {};
+
+  if(query.searchText){
+    filter["$or"] = [
+      {
+        email: query.searchText
+      },
+      {
+        username: {
+          $regex: query.searchText
+        }
+      }
+    ]
   }
 
-  decodeJwt(token: string) {
-    const decoded: string | undefined | any = jwt.verify(
-      token,
-      process.env.JWT_SECRET as string
-    );
-    return decoded;
-  }
-
-  // static buildQuery(req: Request){
-  //   const query = req.query;
-  //   let filterQuery: any = {};
-  //   if(query.email){
-  //     filterQuery.email = query.email;
-  //   }
-  //   if()
-  // }
+  return filter;
 }
+
+const User = mongoose.model("User", userSchema);
+
+export { User };

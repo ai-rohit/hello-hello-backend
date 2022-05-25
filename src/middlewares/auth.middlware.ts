@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { UserModel } from "@models";
+import { User } from "@models";
 import jwt from "jsonwebtoken";
 import { IUser } from "@interfaces";
 
@@ -9,7 +9,7 @@ export const verifyLogin = async (
   next: NextFunction
 ) => {
   let token: string;
-  const userModel = new UserModel();
+  // const userModel = new UserModel();
 
   if (
     req.headers.authorization &&
@@ -33,7 +33,7 @@ export const verifyLogin = async (
           message: "Frobidden",
         });
       }
-      const user = await userModel.findById<IUser>(decoded.user);
+      const user = await User.findById<IUser>(decoded.user);
 
       if (!user) {
         return res.status(401).json({

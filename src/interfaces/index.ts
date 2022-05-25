@@ -7,11 +7,19 @@ export interface ITokenData {
 }
 
 export interface IUser extends Document {
+  firstName?: string;
+  lastName?: string;
+  username?: string;
+  avatar?: string;
+  bio?: string;
+  image?: string;
+  phoneNumber?: string;
   email: string;
   role: string;
   tokenData?: ITokenData;
   generateJwtTokens(type: string): string;
   decodeJwt(type: string): string | jwt.JwtPayload;
+  buildFilterQuery: (req: any) => any;
 }
 
 export interface IProfile extends Document {

@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { BaseModel } from "./base.model";
 import { IProfile } from "../interfaces";
 
 const profileSchema = new mongoose.Schema<IProfile>({
@@ -18,10 +17,6 @@ const profileSchema = new mongoose.Schema<IProfile>({
   bio: {
     type: String,
   },
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-  },
   image: {
     type: String,
     default: "uploads/default.jpeg",
@@ -38,8 +33,3 @@ const profileSchema = new mongoose.Schema<IProfile>({
 
 const Profile = mongoose.model<IProfile>("Profile", profileSchema);
 
-export class ProfileModel extends BaseModel {
-  constructor() {
-    super(Profile);
-  }
-}

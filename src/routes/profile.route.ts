@@ -1,40 +1,40 @@
 import { Router, Request, Response } from "express";
 import { validateProfileData, validateProfileForUpdate } from "@validators";
 import { handleErrors, uploadImage, wrapSync } from "@helpers";
-import { ProfileController } from "@controllers";
+import { updateProfile, myProfile, changeAvatar } from "@controllers";
 import { verifyLogin } from "@middlewares";
 
 const profileRouter = Router();
 
-const profile = new ProfileController();
+// const profile = new ProfileController();
 
-profileRouter.post(
-  "/create",
-  validateProfileData(),
-  handleErrors,
-  verifyLogin,
-  wrapSync((req: Request, res: Response) => profile.createUserProfile(req, res))
-);
+// profileRouter.post(
+//   "/create",
+//   validateProfileData(),
+//   handleErrors,
+//   verifyLogin,
+//   wrapSync((req: Request, res: Response) => profile.createUserProfile(req, res))
+// );
 
 profileRouter.patch(
   "/",
   verifyLogin,
   validateProfileForUpdate(),
   handleErrors,
-  wrapSync((req: Request, res: Response) => profile.updateProfile(req, res))
+  wrapSync(updateProfile)
 );
 
 profileRouter.get(
   "/me",
   verifyLogin,
-  wrapSync((req: Request, res: Response) => profile.myProfile(req, res))
+  wrapSync(myProfile)
 );
 
 profileRouter.post(
   "/me/profile-image",
   verifyLogin,
   uploadImage,
-  wrapSync((req: Request, res: Response) => profile.changeAvatar(req, res))
+  wrapSync(changeAvatar)
 );
 
 export default profileRouter;

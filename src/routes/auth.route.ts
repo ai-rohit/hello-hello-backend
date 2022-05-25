@@ -1,29 +1,29 @@
 import { Router, Request, Response } from "express";
 import { validateEmail, validateEmailVerification } from "@validators";
 import { handleErrors, wrapSync } from "@helpers";
-import { AuthController } from "@controllers";
+import { login, verifyUser, getAccessToken } from "@controllers";
 
 const authRouter = Router();
 
-const auth = new AuthController();
+// const auth = new AuthController();
 
 authRouter.post(
   "/login",
   validateEmail(),
   handleErrors,
-  wrapSync((req: Request, res: Response) => auth.login(req, res))
+  wrapSync(login)
 );
 
 authRouter.post(
   "/verify-user",
   validateEmailVerification(),
   handleErrors,
-  wrapSync((req: Request, res: Response) => auth.verifyUser(req, res))
+  wrapSync(verifyUser)
 );
 
 authRouter.post(
   "/access-token",
-  wrapSync((req: Request, res: Response) => auth.getAccessToken(req, res))
+  wrapSync(getAccessToken)
 );
 
 export default authRouter;
