@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { NextFunction, Request, Response } from "express";
 import { unlinkSync } from "fs";
 import { IUser } from "@interfaces";
@@ -27,60 +28,72 @@ import { User } from "@models";
 // //     return this.successRes(profile, res);
 // }
 
-export const myProfile = async(req: Request, res: Response, next: NextFunction)=>{
+export const myProfile = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const user = await User.findById(req.currentUser._id);
-  if(!user) return res.status(400).json("Couldn't get profile of the user")
+  if (!user) return res.status(400).json("Couldn't get profile of the user");
   return res.status(200).json(user);
-}
+};
 
-export const updateProfile = async(req: Request, res: Response, next: NextFunction)=>{
+export const updateProfile = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const { firstName, lastName, username, bio, phone } = req.body;
   const profile = await User.findById<IUser>(req.currentUser._id);
   if (!profile) {
-    return res.status(404).json("Couldn't find user to update profile")
+    return res.status(404).json("Couldn't find user to update profile");
   }
 
   if (firstName) profile.firstName = firstName;
   if (lastName) profile.lastName = lastName;
-  if (username){
+  if (username) {
     const userWithUsernm = await User.findOne<IUser>({
-      username
-    })
-    if(!userWithUsernm){
+      username,
+    });
+    if (!userWithUsernm) {
       profile.username = username;
-    }else{
+    } else {
       return res.status(400).json("Username already taken");
     }
-  } 
-  if (phone){
+  }
+  if (phone) {
     const userWithPhone = await User.findOne<IUser>({
-      phoneNumber: phone
-    })
-    if(!userWithPhone){
+      phoneNumber: phone,
+    });
+    if (!userWithPhone) {
       profile.phoneNumber = phone;
-    }else{
+    } else {
       return res.status(400).json("Phone number already in use");
     }
-  } 
+  }
   if (bio) profile.bio = bio;
   const result: IUser = await profile.save();
-  return res.status(200).json(result)
-}
+  return res.status(200).json(result);
+};
 
-export const changeAvatar = async(req: Request, res: Response, next: NextFunction)=>{
-    if (!req.file) {
-      return res.status(400).json("Image is required for upload");
+export const changeAvatar = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  if (!req.file) {
+    return res.status(400).json("Image is required for upload");
+  }
+  const profile = await User.findById<IUser>(req.currentUser._id);
+  let result;
+  if (profile) {
+    if (profile.image && profile.image !== "uploads/default.jpeg") {
+      unlinkSync(profile.image);
     }
-    const profile = await User.findById<IUser>(req.currentUser._id);
-    let result;
-    if (profile) {
-      if (profile.image && profile.image !== "uploads/default.jpeg") {
-        unlinkSync(profile.image);
-      }
-      profile.image = req.file?.path;
-      result = await profile.save();
-      return res.status(200).json(result);
-    } else {
-      return res.status(404).json("Coudln't find user for image upload")
-    }
-}
+    profile.image = req.file?.path;
+    result = await profile.save();
+    return res.status(200).json(result);
+  } else {
+    return res.status(404).json("Coudln't find user for image upload");
+  }
+};

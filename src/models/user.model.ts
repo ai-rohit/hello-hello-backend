@@ -45,13 +45,14 @@ const userSchema = new mongoose.Schema<IUser>(
       },
     },
   },
-  { timestamps: true,
+  {
+    timestamps: true,
     toJSON: {
-      virtuals: true
+      virtuals: true,
     },
     toObject: {
-      virtuals: true
-    } 
+      virtuals: true,
+    },
   }
 );
 
@@ -85,25 +86,25 @@ userSchema.methods.generateJwtTokens = function (type: string) {
   }
 };
 
-userSchema.statics.buildFilterQuery = (req)=>{
+userSchema.statics.buildFilterQuery = (req) => {
   const { query } = req;
-  let filter: any = {};
+  const filter: any = {};
 
-  if(query.searchText){
+  if (query.searchText) {
     filter["$or"] = [
       {
-        email: query.searchText
+        email: query.searchText,
       },
       {
         username: {
-          $regex: query.searchText
-        }
-      }
-    ]
+          $regex: query.searchText,
+        },
+      },
+    ];
   }
 
   return filter;
-}
+};
 
 const User = mongoose.model("User", userSchema);
 

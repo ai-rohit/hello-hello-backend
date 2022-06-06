@@ -1,6 +1,6 @@
+import path from "path";
 import hbs from "nodemailer-express-handlebars";
 import nodemailer from "nodemailer";
-import path from "path";
 import { MailParam } from "@interfaces";
 
 class Mailer {
@@ -60,4 +60,5 @@ class Mailer {
 }
 
 const mailer = new Mailer();
+
 export { mailer };
