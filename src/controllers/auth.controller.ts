@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { NextFunction, Request, Response } from "express";
 import { encryptData, generateRandomToken, mailer, verifyJwt } from "@helpers";
 import { ITokenData, IUser } from "@interfaces";

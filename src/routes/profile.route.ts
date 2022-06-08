@@ -1,5 +1,5 @@
-import { Router, Request, Response } from "express";
-import { validateProfileData, validateProfileForUpdate } from "@validators";
+import { Router } from "express";
+import { validateProfileForUpdate } from "@validators";
 import { handleErrors, uploadImage, wrapSync } from "@helpers";
 import { updateProfile, myProfile, changeAvatar } from "@controllers";
 import { verifyLogin } from "@middlewares";

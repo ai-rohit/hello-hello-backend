@@ -1,4 +1,4 @@
-import { Router, Request, Response } from "express";
+import { Router } from "express";
 import { validateEmail, validateEmailVerification } from "@validators";
 import { handleErrors, wrapSync } from "@helpers";
 import { login, verifyUser, getAccessToken } from "@controllers";
