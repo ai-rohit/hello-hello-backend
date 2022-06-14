@@ -42,7 +42,6 @@ export interface IFriendReq extends Document {
 interface IBlockStatus {
   isBlocked: boolean;
   blockedBy: ObjectId;
-
 }
 
 export interface IFriendShip extends Document {
@@ -56,6 +55,7 @@ export interface IFriendShip extends Document {
 
 export interface IRoom extends Document {
   name: string;
+  roomType: number;
   participants: Array<ObjectId>;
   isDeleted: boolean;
   createdAt: Date;
@@ -64,7 +64,7 @@ export interface IRoom extends Document {
 
 export interface IMessage extends Document {
   message?: string;
-  messageType:string;
+  messageType: string;
   sender: ObjectId;
   // receiver: ObjectId;
   seen: Array<ObjectId>;
@@ -72,7 +72,7 @@ export interface IMessage extends Document {
   attachment?: string;
   image?: string;
   createdAt: Date;
-  updatedAt: Date; 
+  updatedAt: Date;
 }
 export interface MailParam {
   from: string;
