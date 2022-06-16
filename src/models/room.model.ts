@@ -24,8 +24,22 @@ const roomSchema = new mongoose.Schema<IRoom>(
       required: true,
     },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+    toJSON: {
+      virtuals: true,
+    },
+    toObject: {
+      virtuals: true,
+    },
+  }
 );
+
+roomSchema.virtual("messages", {
+  ref: "Message",
+  foreignField: "roomId",
+  localField: "_id",
+});
 
 const Room = mongoose.model("Room", roomSchema);
 

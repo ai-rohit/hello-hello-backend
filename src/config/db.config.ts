@@ -8,8 +8,7 @@ const options = {
   retryWrites: false,
 };
 
-const url: string =
-  process.env.MONGO_URL || "mongodb://127.0.0.1:27017/hello-hello-backend";
+const url = "mongodb://127.0.0.1:27017/hello-hello-backend";
 
 export const dbConfig = {
   options,

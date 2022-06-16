@@ -1,5 +1,7 @@
+import { Response } from "express";
 import jwt from "jsonwebtoken";
-import { Document, ObjectId } from "mongoose";
+import { Document, ObjectId, Types } from "mongoose";
+import { Socket } from "socket.io";
 
 export interface ITokenData {
   token: string;
@@ -56,7 +58,7 @@ export interface IFriendShip extends Document {
 export interface IRoom extends Document {
   name: string;
   roomType: number;
-  participants: Array<ObjectId>;
+  participants: Array<Types.ObjectId>;
   isDeleted: boolean;
   createdAt: Date;
   updatedAt: Date;
@@ -80,6 +82,14 @@ export interface MailParam {
   subject: string;
   message: string;
   data: string;
+}
+
+export interface ISocket extends Socket {
+  user?: IUser;
+}
+
+export interface IResponse extends Response {
+  io?: any;
 }
 
 export * from "./model.interface";
