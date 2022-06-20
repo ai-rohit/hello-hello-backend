@@ -73,7 +73,7 @@ const startServer = async (): Promise<any> => {
           socket.to(roomId).emit("incoming-msg", newMessage);
         } else {
           const currentRoom = userRooms.filter((room) => {
-            // console.log(room.participants.includes(receiver));
+            console.log(room.participants.includes(receiver));
             if (room.roomType === 0 && room.participants.includes(receiver)) {
               return room;
             }
