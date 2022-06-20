@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>rohit.shrestha.a18</title>
   </head>
 
   <body>
@@ -16,7 +16,7 @@
   <script>
     const socket = io({
       auth: {
-        jwt: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjI4YjU1MDk0MWEyOWM1NGYzZDMzZTc1IiwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTY1NTQ1NTk0OSwiZXhwIjoxNjU1NjI4NzQ5fQ.kJxf28G4_HXlcGzws9nmIKkHEfNxfdtmuVrP-CynDtg",
+        jwt: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjJhYzNmZDgyMDQ5ZTFmMDAzNWU4YWU0IiwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTY1NTQ2ODkyMiwiZXhwIjoxNjU1NjQxNzIyfQ.V36DZBK-9_SrTAiWXbNoZUpn5qpkVCH6K37qrcM6iHo",
       },
     });
 
@@ -29,12 +29,19 @@
       console.log(data);
     });
 
+    socket.on("error", function (err) {
+      console.log(err);
+    });
+    socket.on("new-incoming-msg", (data) => {
+      console.log("newwwewasdas");
+      console.log(data);
+    });
     const sendBtn = document.querySelector("#send-btn");
     sendBtn.addEventListener("click", () => {
       socket.emit("new-msg", {
         message: "test",
         messageType: "test",
-        roomId: "62a8860962da6415390cd6d3",
+        roomId: "62ad86adbdc692b81fe29c52",
       });
     });
   </script>

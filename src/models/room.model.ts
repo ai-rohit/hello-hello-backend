@@ -35,10 +35,11 @@ const roomSchema = new mongoose.Schema<IRoom>(
   }
 );
 
-roomSchema.virtual("messages", {
+roomSchema.virtual("recentMessages", {
   ref: "Message",
   foreignField: "roomId",
   localField: "_id",
+  options: { sort: { createdAt: -1 }, limit: 2 },
 });
 
 const Room = mongoose.model("Room", roomSchema);

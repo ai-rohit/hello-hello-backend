@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>shrestharohit116</title>
   </head>
 
   <body>
@@ -16,7 +16,7 @@
   <script>
     const socket = io({
       auth: {
-        jwt: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjI4YjU1MDk0MWEyOWM1NGYzZDMzZTc1IiwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTY1NTQ1NTk0OSwiZXhwIjoxNjU1NjI4NzQ5fQ.kJxf28G4_HXlcGzws9nmIKkHEfNxfdtmuVrP-CynDtg",
+        jwt: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjJhODg1YzQ0NjExMTIyMGMyNjk5N2NhIiwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTY1NTQ2ODgxNiwiZXhwIjoxNjU1NjQxNjE2fQ.k2a88-x6aFNY4EEQNoYqwN31DhquafHRCGZkNFv2KEg",
       },
     });
 
@@ -24,6 +24,13 @@
       console.log(err);
     });
 
+    socket.on("error", function (err) {
+      console.log(err);
+    });
+    socket.on("new-incoming-msg", (data) => {
+      console.log("newwwewasdas");
+      console.log(data);
+    });
     socket.on("incoming-msg", (data) => {
       console.log("ewasdas");
       console.log(data);
@@ -34,7 +41,7 @@
       socket.emit("new-msg", {
         message: "test",
         messageType: "test",
-        roomId: "62a8860962da6415390cd6d3",
+        receiver: "62ac3fd82049e1f0035e8ae4",
       });
     });
   </script>

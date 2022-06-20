@@ -3,6 +3,6 @@ import { findUser } from "@controllers";
 const router = express.Router();
 
 // router.get("/:id", );
-router.get("/search", findUser)
+router.get("/search", findUser);
 
 export default router;
