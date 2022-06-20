@@ -4,10 +4,8 @@ import { TEXT } from "@constants";
 import { Server } from "socket.io";
 import { createServer } from "http";
 import { verifyJwt } from "./helpers/token.helper";
-import { User } from "./models/user.model";
+import { User, Room, Message } from "@models";
 import { IRoom, ISocket, IUser } from "@interfaces";
-import { Room } from "./models/room.model";
-import { Message } from "./models/message.model";
 
 const startServer = async (): Promise<any> => {
   const app = initializeServer();
