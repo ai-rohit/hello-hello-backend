@@ -17,20 +17,29 @@ export const getUserByEmail = async (req: Request, res: Response) => {
 
 export const findUser = async (req: Request, res: Response) => {
   const { searchText } = req.query;
-  const filterQuery: any = {};
-  if (searchText) {
-    filterQuery["$or"] = [
+  const filterQuery: any = {
+    $and: [
       {
-        email: searchText,
-      },
-      {
-        username: {
-          $regex: searchText,
+        _id: {
+          $ne: req.currentUser._id,
         },
       },
-    ];
+    ],
+  };
+  if (searchText) {
+    filterQuery["$and"].push({
+      $or: [
+        {
+          email: searchText,
+        },
+        {
+          username: {
+            $regex: searchText,
+          },
+        },
+      ],
+    });
   }
-
   const userFromEmail = await User.find<IUser>(filterQuery, [
     "firstName",
     "lastName",

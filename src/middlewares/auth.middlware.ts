@@ -41,7 +41,6 @@ export const verifyLogin = async (
           message: "The user no longer exists",
         });
       }
-
       req.currentUser = user;
       return next();
     } catch (err) {

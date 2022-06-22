@@ -87,9 +87,9 @@ export const changeAvatar = async (
   const profile = await User.findById<IUser>(req.currentUser._id);
   let result;
   if (profile) {
-    if (profile.image && profile.image !== "uploads/default.jpeg") {
-      unlinkSync(profile.image);
-    }
+    // if (profile.image && profile.image !== "uploads/default.jpeg") {
+    //   unlinkSync(profile.image);
+    // }
     profile.image = req.file?.path;
     result = await profile.save();
     return res.status(200).json(result);

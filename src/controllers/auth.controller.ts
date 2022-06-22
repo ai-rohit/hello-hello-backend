@@ -71,6 +71,7 @@ export const verifyUser = async (
       await user.save();
       return res.status(200).json({ accessToken, refreshToken, hasProfile });
     }
+    console.log(user, req.body);
     return res.status(400).json("Sorry, token doesn't match");
   }
   return res.status(500).json("Something went wrong");
