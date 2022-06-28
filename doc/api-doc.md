@@ -16,3 +16,8 @@
   - `patch` request
 - `avatar upload` -> `/api/v1/profile/me/profile-image`
   - `post` request
+- `get rooms` -> `/api/v1/rooms`
+  - `get` request
+- `get messages` -> `/api/v1/messages`
+  - `get` request
+  - `query params` -> roomId (required), limit?, page?
