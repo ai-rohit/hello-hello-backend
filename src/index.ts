@@ -11,7 +11,11 @@ const startServer = async (): Promise<any> => {
   const app = initializeServer();
 
   const server = createServer(app);
-  const io = new Server(server);
+  const io = new Server(server, {
+    cors: {
+      origin: "*",
+    },
+  });
 
   const connectedUsers = new Map();
 
@@ -30,6 +34,7 @@ const startServer = async (): Promise<any> => {
         next();
       }
     } catch (err) {
+      console.log(err);
       return next(new Error("Error authenticating"));
     }
   });

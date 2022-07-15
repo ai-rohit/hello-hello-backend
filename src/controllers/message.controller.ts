@@ -22,6 +22,10 @@ export const getRoomMessages = async (req: Request, res: Response) => {
   const skip = (pageNum - 1) * limit;
 
   const messages = await Message.find(filter)
+    .populate({
+      path: "sender",
+      select: ["id", "image", "firstName", "lastName", "username"],
+    })
     .sort(sort)
     .skip(skip)
     .limit(limit);
