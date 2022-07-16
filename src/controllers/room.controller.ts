@@ -15,3 +15,6 @@ export const getMyRooms = async (req: Request, res: Response) => {
     .populate("recentMessages");
   return res.status(200).json(rooms);
 };
+
+//no room
+//recent messages

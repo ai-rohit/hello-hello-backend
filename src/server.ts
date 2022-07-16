@@ -5,13 +5,14 @@ import cors from "cors";
 import { dbConfig } from "@config";
 import routes from "@routes";
 import { TEXT } from "@constants";
-
+// import { initializeApp } from "firebase-admin/app";
 // import { getIp } from "./helpers/ip.helper";
 
 /**
  * Create server config.
  */
 //getIp();
+// initializeApp();
 const initializeServer = (): Express => {
   const app: Express = express();
   app.use(cors());
@@ -19,12 +20,14 @@ const initializeServer = (): Express => {
   app.use(express.json());
   app.set("views", path.join(__dirname, "views"));
   app.use("/public", express.static("public"));
+  console.log(dbConfig);
   mongoose
     .connect(dbConfig.url, dbConfig.options)
     .then(() => {
       console.log(TEXT.DATABASE_STATUS);
     })
     .catch((err) => {
+      console.log("failed connecting to database");
       console.log(err);
     });
 
