@@ -73,7 +73,13 @@ const startServer = async (): Promise<any> => {
             roomId,
           });
           await newMessage.save();
-          socket.to(roomId).emit("incoming-msg", newMessage);
+          socket.to(roomId).emit(
+            "incoming-msg",
+            await newMessage.populate({
+              path: "sender",
+              select: ["firstName", "lastName", "image", "username"],
+            })
+          );
         } else {
           const currentRoom = userRooms.filter((room) => {
             console.log(room.participants.includes(receiver));
@@ -103,7 +109,13 @@ const startServer = async (): Promise<any> => {
               roomId: room._id,
             });
             await newMessage.save();
-            io.to(room._id.toString()).emit("new-incoming-msg", newMessage);
+            io.to(room._id.toString()).emit(
+              "new-incoming-msg",
+              await newMessage.populate({
+                path: "sender",
+                select: ["firstName", "lastName", "image", "username"],
+              })
+            );
             // console.log("new rooms", io.sockets.adapter.rooms);
           } else {
             console.log("abc");
