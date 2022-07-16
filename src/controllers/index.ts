@@ -4,3 +4,4 @@ export * from "./profile.controller";
 export * from "./user.controller";
 export * from "./room.controller";
 export * from "./message.controller";
+export * from "./notification.controller";

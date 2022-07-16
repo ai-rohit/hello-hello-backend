@@ -92,5 +92,21 @@ export interface IResponse extends Response {
   io?: any;
 }
 
+export interface INotification {
+  sender: ObjectId;
+  receiver: ObjectId;
+  roomId: ObjectId;
+  type: string;
+  isRead: boolean;
+  message: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface IDeviceToken extends Document {
+  userId: ObjectId;
+  tokens: Array<string>;
+}
+
 export * from "./model.interface";
 export * from "./populate.interface";

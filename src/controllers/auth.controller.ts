@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { NextFunction, Request, Response } from "express";
 import { encryptData, generateRandomToken, mailer, verifyJwt } from "@helpers";
-import { ITokenData, IUser } from "@interfaces";
-import { User } from "@models";
+import { ITokenData, IUser, IDeviceToken } from "@interfaces";
+import { User, DeviceToken } from "@models";
 
 export const login = async (req: Request, res: Response, _: NextFunction) => {
   const { email } = req.body;
@@ -146,3 +146,20 @@ export const getAccessToken = async (
 //     }
 //   }
 // }
+
+export const logout = async (req: Request, res: Response) => {
+  const deviceToken: string = req.body.deviceToken;
+  if (deviceToken) {
+    let deviceTokens = await DeviceToken.findOne({
+      userId: req.currentUser._id,
+    });
+
+    if (deviceTokens) {
+      deviceTokens.tokens = deviceTokens.tokens.filter(
+        (item) => item != deviceToken
+      );
+      deviceTokens = await deviceTokens.save();
+    }
+  }
+  return res.status(200).json("logged out");
+};
