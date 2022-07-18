@@ -1,5 +1,5 @@
-import { Message } from "@models";
 import { Request, Response } from "express";
+import { Message, Room } from "@models";
 import { pageConfig } from "@constants";
 
 export const getRoomMessages = async (req: Request, res: Response) => {
@@ -12,6 +12,14 @@ export const getRoomMessages = async (req: Request, res: Response) => {
       detail: "Room not selected for messages!",
     });
   }
+
+  const room = await Room.findById(query.roomId);
+  if (!room) {
+    return res.status(404).json({
+      detail: "Room not found",
+    });
+  }
+
   const filter = {
     roomId: query.roomId,
   };
