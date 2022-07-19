@@ -96,12 +96,13 @@ const startServer = async (): Promise<any> => {
             socket.join(room._id.toString());
 
             const receiverSockets = connectedUsers.get(receiver.toString());
-            if (receiverSockets.length !== 0) {
-              for (let i = 0; i < receiverSockets.length; i++) {
-                receiverSockets[i].socket.join(room._id.toString());
+            if (receiverSockets) {
+              if (receiverSockets.length !== 0) {
+                for (let i = 0; i < receiverSockets.length; i++) {
+                  receiverSockets[i].socket.join(room._id.toString());
+                }
               }
             }
-
             const newMessage = new Message({
               message,
               messageType,
