@@ -49,8 +49,6 @@ const startServer = async (): Promise<any> => {
       socket,
       socketId: socket.id,
     });
-
-    console.log(connectedUsers);
     const userRooms = await Room.find<IRoom>({
       participants: userId,
     });
@@ -58,13 +56,13 @@ const startServer = async (): Promise<any> => {
     const roomIds: Array<string> = userRooms.map((room) => room.id.toString());
 
     socket.join(roomIds);
-    console.log("rooms", io.sockets.adapter.rooms);
 
     socket.on("new-msg", async (data: any) => {
       try {
+        console.log("connectedUsers", connectedUsers);
+        console.log("rooms", io.sockets.adapter.rooms);
         const { message, messageType, receiver, roomId } = data;
         const sender = userId;
-        // console.log(data);
         if (roomId) {
           const newMessage = new Message({
             message,
@@ -72,7 +70,9 @@ const startServer = async (): Promise<any> => {
             sender,
             roomId,
           });
+          console.log("roomId to send event", roomId);
           await newMessage.save();
+          console.log("here");
           socket.to(roomId).emit(
             "incoming-msg",
             await newMessage.populate({
@@ -82,7 +82,7 @@ const startServer = async (): Promise<any> => {
           );
         } else {
           const currentRoom = userRooms.filter((room) => {
-            console.log(room.participants.includes(receiver));
+            // console.log(room.participants.includes(receiver));
             if (room.roomType === 0 && room.participants.includes(receiver)) {
               return room;
             }
@@ -110,6 +110,7 @@ const startServer = async (): Promise<any> => {
               roomId: room._id,
             });
             await newMessage.save();
+            console.log("not here");
             io.to(room._id.toString()).emit(
               "new-incoming-msg",
               await newMessage.populate({
