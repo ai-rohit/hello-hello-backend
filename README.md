@@ -10,3 +10,4 @@ MAIL_PASSWORD=<mail_password>
 JWT_REFRESH_SECRET=<refresh_secret>
 JWT_ACCESS_SECRET=<access_secret>
 ```
+### Live at https://hellochat.tk
