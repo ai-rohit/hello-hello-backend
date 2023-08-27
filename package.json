@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "start": "ts-node-dev -r tsconfig-paths/register --respawn src/index.ts",
-    "dev": "set NODE_PATH=./build && ts-node -r tsconfig-paths/register  --transpileOnly build/src/index.js",
+    "dev": "set NODE_PATH=./build && ts-node -r tsconfig-paths/register --transpile-only build/src/index.js",
     "build": "tsc -p .",
     "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write"
   },
